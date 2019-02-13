@@ -15,8 +15,6 @@ cache:
   stage: test
   script:
   - 'mvn $MAVEN_CLI_OPTS verify site site:stage'
-  except:
-  - master
 
 validate:jdk8:
   <<: *validate
