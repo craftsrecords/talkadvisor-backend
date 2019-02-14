@@ -4,9 +4,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class TalkadvisorApplication
+class TalkAdvisorApplication
 
 fun main(args: Array<String>) {
-	runApplication<TalkadvisorApplication>(*args)
+	runApplication<TalkAdvisorApplication>(*args)
 }
 
