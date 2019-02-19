@@ -1,5 +1,6 @@
 package org.craftsrecords.talkadvisor.recommendation
 
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
+import java.util.*
 
-class Recommendation(val talks: Set<Talk>)
+class Recommendation(val id: UUID = UUID.randomUUID(), val talks: Set<Talk>)
