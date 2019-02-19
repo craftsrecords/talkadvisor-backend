@@ -1,12 +1,12 @@
-package org.craftsrecords.talkadvisor.recommendation
+package org.craftsrecords.talkadvisor.recommendation.criteria
 
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
-internal class TopicTest{
+internal class TopicTest {
 
     @Test
-    fun `should not create a test with a blank name`(){
+    fun `should not create a test with a blank name`() {
         assertThatThrownBy { Topic("  ") }
                 .isInstanceOf(IllegalArgumentException::class.java)
                 .hasMessage("Cannot create a topic with a blank name")

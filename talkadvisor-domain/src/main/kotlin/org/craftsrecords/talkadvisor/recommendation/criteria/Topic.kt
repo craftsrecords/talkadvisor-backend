@@ -1,4 +1,4 @@
-package org.craftsrecords.talkadvisor.recommendation
+package org.craftsrecords.talkadvisor.recommendation.criteria
 
 import org.apache.commons.lang3.Validate.notBlank
 

@@ -1,4 +1,4 @@
-package org.craftsrecords
+package org.craftsrecords.talkadvisor
 
 import cucumber.api.CucumberOptions
 import cucumber.api.junit.Cucumber

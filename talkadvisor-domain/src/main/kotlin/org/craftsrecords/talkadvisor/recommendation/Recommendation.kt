@@ -1,7 +1,5 @@
 package org.craftsrecords.talkadvisor.recommendation
 
-import org.craftsrecords.talkadvisor.recommendation.api.RecommendTalksForTopic
+import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 
-
-class Recommendation() {
-}
+class Recommendation(val talks: Set<Talk>)
