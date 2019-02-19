@@ -28,6 +28,7 @@
                                         <!-- but allow kotlin dependencies-->
                                         <include>org.jetbrains.kotlin:*</include>
                                         <include>org.jetbrains:annotations</include>
+                                        <include>org.apache.commons:commons-lang3</include>
                                         <!-- and test dependencies-->
                                         <include>*:*:*:*:test</include>
                                     </includes>
