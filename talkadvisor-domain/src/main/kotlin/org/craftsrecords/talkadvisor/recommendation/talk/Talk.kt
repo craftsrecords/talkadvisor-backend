@@ -14,10 +14,29 @@ class Talk private constructor(id: String,
     val duration = notNegative(duration)
     val format = TalkFormat.ofDuration(duration)
 
+
     private fun notNegative(duration: Duration): Duration {
         Validate.isTrue(duration.isPositive(), "Talk duration must be strictly positive")
         return duration
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as Talk
+
+        if (id != other.id) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
+    override fun toString(): String {
+        return "Talk(id='$id', title='$title', duration=$duration, format=$format)"
+    }
+
 
     companion object {
         inline fun with(content: Builder.() -> Unit) = Builder().apply(content)

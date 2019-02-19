@@ -43,6 +43,24 @@ internal class TalkTest {
                 .hasMessage("Talk duration must be strictly positive")
     }
 
+    @Test
+    fun `should satisfy entity equality`() {
+        val talk1 = talk().build()
+        val talk2 = talk().apply { title = "new title" }.build()
+
+        assertThat(talk1).isEqualTo(talk2)
+        assertThat(talk1.hashCode()).isEqualTo(talk2.hashCode())
+    }
+
+    @Test
+    fun `should satisfy entity inequality`() {
+        val talk1 = talk().build()
+        val talk2 = talk().apply { id = "new id" }.build()
+
+        assertThat(talk1).isNotEqualTo(talk2)
+        assertThat(talk1.hashCode()).isNotEqualTo(talk2.hashCode())
+    }
+
     fun talk() =
             Talk.with {
                 id = "id"
