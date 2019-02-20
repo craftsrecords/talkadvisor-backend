@@ -16,7 +16,7 @@ class TalksAdvisor(private val searchTalks: SearchTalks, private val recommendat
     }
 
     private fun getTalksSatisfying(preferences: Preferences): Set<Talk> {
-        return searchTalks.forTopic(preferences.topic)
+        return searchTalks.forTopics(preferences.topics)
                 .filter { preferences.talksFormats.contains(it.format) }
                 .toSet()
     }

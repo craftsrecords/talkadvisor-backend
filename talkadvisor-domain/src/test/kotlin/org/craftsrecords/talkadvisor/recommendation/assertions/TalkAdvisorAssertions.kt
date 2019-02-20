@@ -2,6 +2,7 @@ package org.craftsrecords.talkadvisor.recommendation.assertions
 
 import org.assertj.core.api.Assertions
 import org.craftsrecords.talkadvisor.recommendation.Recommendation
+import org.craftsrecords.talkadvisor.recommendation.profile.Profile
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 
 class TalkAdvisorAssertions : Assertions() {
@@ -14,5 +15,8 @@ class TalkAdvisorAssertions : Assertions() {
 
         @JvmStatic
         fun assertThat(actual: Iterable<Talk>) = TalksAssert(actual)
+
+        @JvmStatic
+        fun assertThat(actual: Profile) = ProfileAssert(actual)
     }
 }

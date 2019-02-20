@@ -42,6 +42,6 @@ public class RecommendationStepdefs implements En {
     }
 
     private Preferences createCriteriaFrom(TestContext testContext) {
-        return new Preferences(testContext.getRequestedTopic(), testContext.getRequestedTalksFormats());
+        return new Preferences(testContext.getRequestedTopics(), testContext.getRequestedTalksFormats());
     }
 }

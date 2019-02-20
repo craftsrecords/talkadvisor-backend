@@ -7,16 +7,20 @@ import java.time.Duration
 import kotlin.random.Random
 
 class HardCodedTalksSearcher : SearchTalks {
-    override fun forTopic(topic: Topic): Set<Talk> {
-        return createTalks(topic)
+    override fun forTopics(topics: Set<Topic>): Set<Talk> {
+        return createTalks(topics)
     }
 
-    private fun createTalks(topic: Topic): Set<Talk> {
-        return (1..20)
+    private fun createTalks(topics: Set<Topic>): Set<Talk> {
+        return topics.flatMap { createTalksForTopic(it.name) }.shuffled().toSet()
+    }
+
+    private fun createTalksForTopic(topicName: String): Set<Talk> {
+        return (1..30)
                 .map {
                     Talk.with {
                         id = it.toString()
-                        title = "${randomText()} ${topic.name} ${randomText()}"
+                        title = "${randomText()} $topicName ${randomText()}"
                         duration = Duration.ofMinutes(Random.nextLong(2, 100))
                     }.build()
                 }.toSet()
