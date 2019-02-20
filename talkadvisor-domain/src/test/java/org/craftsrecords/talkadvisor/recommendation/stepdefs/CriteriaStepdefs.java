@@ -10,8 +10,8 @@ import java.util.Set;
 import static java.util.Collections.singleton;
 import static java.util.stream.Collectors.toSet;
 
-public class PreferencesStepdefs implements En {
-    public PreferencesStepdefs(TestContext testContext) {
+public class CriteriaStepdefs implements En {
+    public CriteriaStepdefs(TestContext testContext) {
         Given("^a guest user who wants to learn (.+)",
                 (String topicName) -> testContext.setRequestedTopics(singleton(new Topic(topicName))));
 
@@ -20,10 +20,6 @@ public class PreferencesStepdefs implements En {
                     Set<TalkFormat> talkFormats = singleton(TalkFormat.valueOf(format));
                     testContext.setRequestedTalksFormats(talkFormats);
                 });
-
-        Given("^a user$", () -> {
-            testContext.setUserId("frequentUser");
-        });
 
         Given("^he wants to learn$", (DataTable topicNames) -> {
             Set<Topic> topics =

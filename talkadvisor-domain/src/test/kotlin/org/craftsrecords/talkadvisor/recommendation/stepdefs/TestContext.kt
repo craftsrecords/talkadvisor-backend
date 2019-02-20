@@ -13,4 +13,5 @@ class TestContext {
     lateinit var userId: String
     lateinit var createdProfile: Profile
     lateinit var requestedPreferences: Preferences
+    var error: Exception? = null
 }
