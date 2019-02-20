@@ -9,8 +9,8 @@ class Talk private constructor(id: String,
                                title: String,
                                duration: Duration) {
 
-    val id = notBlank(id, "Cannot create a Talk is a blank id")
-    val title = notBlank(title, "Cannot create a Talk is a blank title")
+    val id = notBlank(id, "Cannot create a Talk is a blank id")!!
+    val title = notBlank(title, "Cannot create a Talk is a blank title")!!
     val duration = notNegative(duration)
     val format = TalkFormat.ofDuration(duration)
 

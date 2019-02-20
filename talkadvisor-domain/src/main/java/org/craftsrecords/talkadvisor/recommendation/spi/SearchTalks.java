@@ -9,5 +9,5 @@ import java.util.Set;
 @FunctionalInterface
 public interface SearchTalks {
     @Nonnull
-    Set<Talk> forTopic(@Nonnull Topic topic);
+    Set<Talk> forTopics(@Nonnull Set<Topic> topics);
 }
