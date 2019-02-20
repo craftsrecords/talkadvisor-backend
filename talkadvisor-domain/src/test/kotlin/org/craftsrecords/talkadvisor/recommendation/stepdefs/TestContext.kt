@@ -1,7 +1,7 @@
 package org.craftsrecords.talkadvisor.recommendation.stepdefs
 
 import org.craftsrecords.talkadvisor.recommendation.Recommendation
-import org.craftsrecords.talkadvisor.recommendation.criteria.Topic
+import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
 
 class TestContext {

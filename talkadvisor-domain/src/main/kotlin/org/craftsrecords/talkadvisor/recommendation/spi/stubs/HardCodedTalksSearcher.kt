@@ -1,6 +1,6 @@
 package org.craftsrecords.talkadvisor.recommendation.spi.stubs
 
-import org.craftsrecords.talkadvisor.recommendation.criteria.Topic
+import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.spi.SearchTalks
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 import java.time.Duration

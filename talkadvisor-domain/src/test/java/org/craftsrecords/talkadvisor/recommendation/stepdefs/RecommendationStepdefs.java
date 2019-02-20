@@ -4,7 +4,7 @@ import cucumber.api.java8.En;
 import kotlin.ranges.ClosedRange;
 import org.craftsrecords.talkadvisor.recommendation.Recommendation;
 import org.craftsrecords.talkadvisor.recommendation.api.RecommendTalksForTopic;
-import org.craftsrecords.talkadvisor.recommendation.criteria.Criteria;
+import org.craftsrecords.talkadvisor.recommendation.preferences.Preferences;
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat;
 
 import java.time.Duration;
@@ -18,8 +18,8 @@ public class RecommendationStepdefs implements En {
                                   RecommendTalksForTopic recommendTalksForTopic) {
         When("^he asks for the related talks$",
                 () -> {
-                    Criteria criteria = createCriteriaFrom(testContext);
-                    Recommendation recommendation = recommendTalksForTopic.getRecommendation(criteria);
+                    Preferences preferences = createCriteriaFrom(testContext);
+                    Recommendation recommendation = recommendTalksForTopic.getRecommendation(preferences);
                     testContext.setRecommendationResult(recommendation);
                 });
         Then("^talkadvisor recommends some talks$", () -> {
@@ -41,7 +41,7 @@ public class RecommendationStepdefs implements En {
                 });
     }
 
-    private Criteria createCriteriaFrom(TestContext testContext) {
-        return new Criteria(testContext.getRequestedTopic(), testContext.getRequestedTalksFormats());
+    private Preferences createCriteriaFrom(TestContext testContext) {
+        return new Preferences(testContext.getRequestedTopic(), testContext.getRequestedTalksFormats());
     }
 }

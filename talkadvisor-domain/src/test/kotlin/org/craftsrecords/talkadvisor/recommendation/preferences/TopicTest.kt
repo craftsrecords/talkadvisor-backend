@@ -1,4 +1,4 @@
-package org.craftsrecords.talkadvisor.recommendation.criteria
+package org.craftsrecords.talkadvisor.recommendation.preferences
 
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
