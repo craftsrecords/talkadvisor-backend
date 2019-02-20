@@ -32,7 +32,7 @@ internal class PreferencesTest {
     @Test
     fun `should satisfy value object equality`() {
         val preferences = Preferences(setOf(Topic("ddd")), setOf(CONFERENCE))
-        val preferences2 = Preferences(setOf(Topic("ddd")), setOf(CONFERENCE))
+        val preferences2 = preferences.copy()
 
         assertThat(preferences).isEqualTo(preferences2)
         assertThat(preferences.hashCode()).isEqualTo(preferences2.hashCode())

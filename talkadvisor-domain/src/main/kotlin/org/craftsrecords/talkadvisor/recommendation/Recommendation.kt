@@ -1,9 +1,10 @@
 package org.craftsrecords.talkadvisor.recommendation
 
+import org.craftsrecords.talkadvisor.recommendation.criteria.Criteria
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 import java.util.*
 
-class Recommendation(val id: UUID = UUID.randomUUID(), talks: Set<Talk>) {
+class Recommendation(val id: UUID = UUID.randomUUID(), talks: Set<Talk>, val criteria: Criteria) {
 
     val talks = talks.toSet()
 
@@ -23,8 +24,6 @@ class Recommendation(val id: UUID = UUID.randomUUID(), talks: Set<Talk>) {
     }
 
     override fun toString(): String {
-        return "Recommendation(id=$id, talks=$talks)"
+        return "Recommendation(id=$id, criteria=$criteria, talks=$talks)"
     }
-
-
 }

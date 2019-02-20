@@ -20,11 +20,13 @@ class HardCodedTalksSearcher : SearchTalks {
                 .map {
                     Talk.with {
                         id = it.toString()
-                        title = "${randomText()} $topicName ${randomText()}"
+                        title = generateTalkName(topicName)
                         duration = Duration.ofMinutes(Random.nextLong(2, 100))
                     }.build()
                 }.toSet()
     }
+
+    private fun generateTalkName(topicName: String) = "${randomText()} $topicName ${randomText()}"
 
     private fun randomText() = Random.nextBits(4).toString()
 }
