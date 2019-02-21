@@ -4,6 +4,6 @@ import org.craftsrecords.talkadvisor.recommendation.Recommendation
 import org.craftsrecords.talkadvisor.recommendation.criteria.GuestCriteria
 
 interface RecommendTalks {
-    fun getRecommendationSatisfying(guestCriteria: GuestCriteria): Recommendation
-    fun getRecommendationGivenProfile(userId: String): Recommendation
+    infix fun satisfying(guestCriteria: GuestCriteria): Recommendation
+    infix fun to(userId: String): Recommendation
 }

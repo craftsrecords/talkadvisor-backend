@@ -8,13 +8,13 @@ class ProfileAssert(actual: Profile) : AbstractAssert<ProfileAssert, Profile>(
         actual,
         ProfileAssert::class.java
 ) {
-    @JvmName("correspondToUser")
-    fun `correspond to user`(userId: String) {
+    @JvmName("correspondsToUser")
+    infix fun `corresponds to user`(userId: String) {
         matches({ actual.id == userId }, "profile id corresponds to userId")
     }
 
     @JvmName("hasPreferences")
-    fun `has preferences`(preferences: Preferences) {
+    infix fun `has preferences`(preferences: Preferences) {
         matches({ actual.preferences == preferences }, "matching expected preferences")
     }
 }
