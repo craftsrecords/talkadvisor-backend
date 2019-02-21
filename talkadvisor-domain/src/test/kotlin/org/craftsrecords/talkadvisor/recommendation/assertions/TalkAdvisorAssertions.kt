@@ -1,22 +1,17 @@
 package org.craftsrecords.talkadvisor.recommendation.assertions
 
-import org.assertj.core.api.Assertions
 import org.craftsrecords.talkadvisor.recommendation.Recommendation
 import org.craftsrecords.talkadvisor.recommendation.profile.Profile
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 
-class TalkAdvisorAssertions : Assertions() {
-    companion object Asserter {
-        @JvmStatic
-        fun assertThat(actual: Recommendation) = RecommendationAssert(actual)
+val Recommendation.that: RecommendationAssert
+    get() = RecommendationAssert(this)
 
-        @JvmStatic
-        fun assertThat(actual: Talk) = TalkAssert(actual)
+val Talk.that: TalkAssert
+    get() = TalkAssert(this)
 
-        @JvmStatic
-        fun assertThat(actual: Iterable<Talk>) = TalksAssert(actual)
+val Iterable<Talk>.those: TalksAssert
+    get() = TalksAssert(this)
 
-        @JvmStatic
-        fun assertThat(actual: Profile) = ProfileAssert(actual)
-    }
-}
+val Profile.that: ProfileAssert
+    get() = ProfileAssert(this)

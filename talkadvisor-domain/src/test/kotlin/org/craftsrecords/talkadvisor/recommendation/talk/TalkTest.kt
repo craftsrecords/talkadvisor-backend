@@ -2,12 +2,10 @@ package org.craftsrecords.talkadvisor.recommendation.talk
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.craftsrecords.talkadvisor.recommendation.assertions.that
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat.CONFERENCE
 import org.junit.jupiter.api.Test
 import java.time.Duration
-import kotlin.IllegalArgumentException
-import kotlin.apply
-import org.craftsrecords.talkadvisor.recommendation.assertions.TalkAdvisorAssertions.Asserter.assertThat as assert
 
 internal class TalkTest {
 
@@ -19,7 +17,7 @@ internal class TalkTest {
         assertThat(talk.id).isEqualTo("id")
         assertThat(talk.title).isEqualTo("title")
         assertThat(talk.duration).isEqualTo(Duration.ofMinutes(45))
-        assert(talk) `is in the format` CONFERENCE
+        talk.that `is in the format` CONFERENCE
     }
 
     @Test

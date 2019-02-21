@@ -2,7 +2,6 @@ package org.craftsrecords.talkadvisor.recommendation.assertions
 
 import org.assertj.core.api.AbstractAssert
 import org.craftsrecords.talkadvisor.recommendation.Recommendation
-import org.craftsrecords.talkadvisor.recommendation.assertions.TalkAdvisorAssertions.Asserter.assertThat
 import org.craftsrecords.talkadvisor.recommendation.criteria.Criteria
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
@@ -14,7 +13,7 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
 ) {
 
     @JvmName("hasTalks")
-    fun `has talks`() {
+    fun hasTalks() {
         matches({ it.talks.isNotEmpty() }, "has talks")
     }
 
@@ -24,7 +23,7 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
             it.criteria.topics.any { topic -> topic.name == topicName }
         }, "recommendations criteria has the topic $topicName")
 
-        assertThat(actual.talks) `are related to topic` topicName
+        actual.talks.those `are related to topic` topicName
     }
 
     @JvmName("hasTalksRelatedTo")
@@ -33,7 +32,7 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
             it.criteria.topics.all { topic -> topics.contains(topic) }
         }, "recommendations criteria has the given topics")
 
-        assertThat(actual.talks) `are related to topics` topics
+        actual.talks.those `are related to topics` topics
     }
 
     @JvmName("hasOnlyTalksInTheFormat")
@@ -42,12 +41,12 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
             it.criteria.talksFormats.all { format -> format == talkFormat }
         }, "recommendations criteria are only of format $talkFormat")
 
-        assertThat(actual.talks) `are in the format` talkFormat
+        actual.talks.those `are in the format` talkFormat
     }
 
     @JvmName("hasOnlyTalksHavingTheirDurationIn")
     infix fun `has only talks having their duration in`(range: ClosedRange<Duration>) {
-        assertThat(actual.talks) `have their duration in ` range
+        actual.talks.those `have their duration in ` range
     }
 
     @JvmName("hasOnlyTalksInTheFormats")
@@ -55,7 +54,7 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
         matches({
             it.criteria.talksFormats.all { talkFormat -> talksFormats.contains(talkFormat) }
         }, "recommendations criteria are talks format in the expected ones")
-        assertThat(actual.talks) `have their format in` talksFormats
+        actual.talks.those `have their format in` talksFormats
     }
 
     @JvmName("correspondsToTheCriteria")

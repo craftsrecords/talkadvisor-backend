@@ -6,4 +6,8 @@ import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
 interface Criteria {
     val topics: Set<Topic>
     val talksFormats: Set<TalkFormat>
+
+    fun hasTalkFormat(talkFormat: TalkFormat): Boolean {
+        return talksFormats.contains(talkFormat)
+    }
 }

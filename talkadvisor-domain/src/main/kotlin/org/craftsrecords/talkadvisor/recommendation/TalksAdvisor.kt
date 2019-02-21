@@ -12,25 +12,25 @@ class TalksAdvisor(private val searchTalks: SearchTalks,
                    private val recommendations: Recommendations,
                    private val profiles: Profiles) : RecommendTalks {
 
-    override fun getRecommendationGivenProfile(userId: String): Recommendation {
+    override fun to(userId: String): Recommendation {
         val profile = profiles.fetch(userId)
-        return this.getRecommendationSatisfying(profile.preferences)
+        return recommendTalksSatisfying(profile.preferences)
     }
 
-    override fun getRecommendationSatisfying(guestCriteria: GuestCriteria): Recommendation {
-        return this.getRecommendationSatisfying(guestCriteria as Criteria)
+    override fun satisfying(guestCriteria: GuestCriteria): Recommendation {
+        return recommendTalksSatisfying(guestCriteria as Criteria)
     }
 
-    private fun getRecommendationSatisfying(criteria: Criteria): Recommendation {
-        val talks = getTalksSatisfying(criteria)
+    private fun recommendTalksSatisfying(criteria: Criteria): Recommendation {
+        val talks = retrieveTalksSatisfying(criteria)
         val recommendation = Recommendation(criteria = criteria, talks = talks)
         recommendations.save(recommendation)
         return recommendation
     }
 
-    private fun getTalksSatisfying(criteria: Criteria): Set<Talk> {
+    private fun retrieveTalksSatisfying(criteria: Criteria): Set<Talk> {
         return searchTalks.forTopics(criteria.topics)
-                .filter { criteria.talksFormats.contains(it.format) }
+                .filter { criteria.hasTalkFormat(it.format) }
                 .toSet()
     }
 }
