@@ -11,6 +11,7 @@
     <artifactId>talkadvisor-infra</artifactId>
     <properties>
         <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
+        <google-api-services-youtube.version>v3-rev206-1.25.0</google-api-services-youtube.version>
     </properties>
     <build>
         <plugins>
@@ -23,8 +24,22 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>org.craftsrecords</groupId>
+            <artifactId>talkadvisor-domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-youtube</artifactId>
+            <version>${google-api-services-youtube.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
