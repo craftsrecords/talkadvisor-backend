@@ -1,0 +1,14 @@
+{
+  "topics": [
+    {
+      "name": "DDD"
+    },
+    {
+      "name": "Hexagonal Architecture"
+    }
+  ],
+  "talksFormats": [
+    "CONFERENCE",
+    "QUICKIE"
+  ]
+}

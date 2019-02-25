@@ -1,9 +1,11 @@
 package org.craftsrecords.talkadvisor.recommendation
 
+import org.craftsrecords.hexarch.Aggregate
 import org.craftsrecords.talkadvisor.recommendation.criteria.Criteria
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 import java.util.*
 
+@Aggregate
 class Recommendation(val id: UUID = UUID.randomUUID(), talks: Set<Talk>, val criteria: Criteria) {
 
     val talks = talks.toSet()

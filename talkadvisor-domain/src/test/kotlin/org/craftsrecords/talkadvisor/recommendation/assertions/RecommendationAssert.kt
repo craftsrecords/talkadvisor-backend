@@ -12,12 +12,10 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
         RecommendationAssert::class.java
 ) {
 
-    @JvmName("hasTalks")
     fun hasTalks() {
         matches({ it.talks.isNotEmpty() }, "has talks")
     }
 
-    @JvmName("hasTalksRelatedTo")
     infix fun `has talks related to`(topicName: String) {
         matches({
             it.criteria.topics.any { topic -> topic.name == topicName }
@@ -26,7 +24,6 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
         actual.talks.those `are related to topic` topicName
     }
 
-    @JvmName("hasTalksRelatedTo")
     infix fun `has talks related to`(topics: Set<Topic>) {
         matches({
             it.criteria.topics.all { topic -> topics.contains(topic) }
@@ -35,7 +32,6 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
         actual.talks.those `are related to topics` topics
     }
 
-    @JvmName("hasOnlyTalksInTheFormat")
     infix fun `has only talks in the format`(talkFormat: TalkFormat) {
         matches({
             it.criteria.talksFormats.all { format -> format == talkFormat }
@@ -44,12 +40,10 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
         actual.talks.those `are in the format` talkFormat
     }
 
-    @JvmName("hasOnlyTalksHavingTheirDurationIn")
     infix fun `has only talks having their duration in`(range: ClosedRange<Duration>) {
         actual.talks.those `have their duration in ` range
     }
 
-    @JvmName("hasOnlyTalksInTheFormats")
     infix fun `has only talks in the formats`(talksFormats: Set<TalkFormat>) {
         matches({
             it.criteria.talksFormats.all { talkFormat -> talksFormats.contains(talkFormat) }
@@ -57,7 +51,6 @@ class RecommendationAssert(actual: Recommendation) : AbstractAssert<Recommendati
         actual.talks.those `have their format in` talksFormats
     }
 
-    @JvmName("correspondsToTheCriteria")
     infix fun `corresponds to the criteria`(criteria: Criteria) {
         matches({ it.criteria == criteria }, "corresponds to the given criteria")
     }
