@@ -2,6 +2,7 @@ package org.craftsrecords.talkadvisor.recommendation.profile
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.craftsrecords.talkadvisor.recommendation.criteria.createPreferences
 import org.junit.jupiter.api.Test
 
 internal class ProfileTest {

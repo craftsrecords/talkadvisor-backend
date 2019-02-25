@@ -21,6 +21,4 @@ class Profile(id: String, val preferences: Preferences) {
     override fun hashCode(): Int {
         return id.hashCode()
     }
-
-
 }
