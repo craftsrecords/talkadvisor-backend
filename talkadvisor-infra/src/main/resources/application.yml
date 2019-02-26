@@ -2,3 +2,6 @@ spring:
   output:
     ansi.enabled: always
 
+server:
+  port: 7777
+
