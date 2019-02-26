@@ -21,8 +21,8 @@ import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler
 import org.springframework.restdocs.operation.preprocess.Preprocessors.*
-import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
-import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
+import org.springframework.restdocs.payload.FieldDescriptor
+import org.springframework.restdocs.payload.PayloadDocumentation.*
 import org.springframework.restdocs.snippet.Attributes.key
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
@@ -82,14 +82,22 @@ internal class ProfileControllerTest {
                         headerWithName("User-Id")
                                 .description("The Id of the user who wants to create his profile")),
 
-                requestFields(
-                        fieldWithPath("topics[]")
-                                .description("list of the topics the user wants some recommendations for"),
-                        fieldWithPath("topics[].name")
-                                .description("the name of the topic"),
-                        fieldWithPath("talksFormats[]")
-                                .description("list of the talks formats the user only wants to watch")
-                                .attributes(key("constraints").value("Must be in ${TalkFormat.values().contentToString()}"))))
+                requestFields(criteriaDescriptor()),
+                responseFields()
+                        .and(fieldWithPath("id").description("the id of the profile"))
+                        .and(fieldWithPath("preferences").description("the stored preferences of the user"))
+                        .andWithPrefix("preferences.", criteriaDescriptor()))
+    }
+
+    private fun criteriaDescriptor(): List<FieldDescriptor> {
+        return listOf(
+                fieldWithPath("topics[]")
+                        .description("list of the topics the user wants some recommendations for"),
+                fieldWithPath("topics[].name")
+                        .description("the name of the topic"),
+                fieldWithPath("talksFormats[]")
+                        .description("list of the talks formats the user only wants to watch")
+                        .attributes(key("constraints").value("Possible values: ${TalkFormat.values().contentToString()}")))
     }
 
     @Test
