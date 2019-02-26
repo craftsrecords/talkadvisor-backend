@@ -1,7 +1,7 @@
 package org.craftsrecords.talkadvisor.recommendation
 
 import org.assertj.core.api.Assertions.assertThat
-import org.craftsrecords.talkadvisor.recommendation.profile.createCriteria
+import org.craftsrecords.talkadvisor.recommendation.criteria.createCriteria
 import org.craftsrecords.talkadvisor.recommendation.talk.createTalk
 import org.craftsrecords.talkadvisor.recommendation.talk.createTalks
 import org.junit.jupiter.api.Test

@@ -6,6 +6,10 @@
     <artifactId>talkadvisor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>talkadvisor</name>
+    <organization>
+        <name>Crafts Records</name>
+        <url>https://gitlab.com/crafts-records</url>
+    </organization>
     <description>Talk Advisor</description>
     <packaging>pom</packaging>
     <modules>
@@ -40,7 +44,7 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M2</version>
+                    <version>3.0.0-M1</version>
                     <executions>
                         <execution>
                             <id>dependencies-sanitization</id>
@@ -93,9 +97,6 @@
                         <args>
                             <arg>-Xjsr305=strict</arg>
                         </args>
-                        <compilerPlugins>
-                            <plugin>spring</plugin>
-                        </compilerPlugins>
                         <jvmTarget>1.8</jvmTarget>
                         <javaParameters>true</javaParameters>
                     </configuration>
@@ -207,7 +208,7 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
+            <artifactId>kotlin-test-junit</artifactId>
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>

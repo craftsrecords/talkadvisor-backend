@@ -7,6 +7,6 @@ import org.springframework.boot.runApplication
 class TalkAdvisorApplication
 
 fun main(args: Array<String>) {
-	runApplication<TalkAdvisorApplication>(*args)
+    runApplication<TalkAdvisorApplication>(*args)
 }
 

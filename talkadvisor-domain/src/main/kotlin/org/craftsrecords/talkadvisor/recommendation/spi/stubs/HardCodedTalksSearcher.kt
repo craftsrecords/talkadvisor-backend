@@ -1,11 +1,13 @@
 package org.craftsrecords.talkadvisor.recommendation.spi.stubs
 
+import org.craftsrecords.hexarch.Stub
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.spi.SearchTalks
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 import java.time.Duration
 import kotlin.random.Random
 
+@Stub
 class HardCodedTalksSearcher : SearchTalks {
     override fun forTopics(topics: Set<Topic>): Set<Talk> {
         return createTalks(topics)
