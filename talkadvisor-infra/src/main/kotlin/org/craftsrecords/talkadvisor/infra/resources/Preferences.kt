@@ -1,4 +1,4 @@
-package org.craftsrecords.talkadvisor.resources
+package org.craftsrecords.talkadvisor.infra.resources
 
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat

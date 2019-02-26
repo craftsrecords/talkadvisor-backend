@@ -8,7 +8,7 @@ import com.google.api.client.testing.http.MockLowLevelHttpRequest
 import com.google.api.client.testing.http.MockLowLevelHttpResponse
 import com.google.api.services.youtube.YouTube
 import org.assertj.core.api.Assertions.assertThat
-import org.craftsrecords.talkadvisor.recommendation.YoutubeSearchTalks
+import org.craftsrecords.talkadvisor.infra.youtube.YoutubeSearchTalks
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 import org.junit.jupiter.api.Test
@@ -18,11 +18,11 @@ internal class YoutubeSearchTalksTest {
 
     private val apiKey = "NOT_REQUIRED_DURING_TESTING"
 
-    private val youtubeSearchResponse: File = File(javaClass.classLoader.getResource("payloads/youtube-search-response.json").file)
+    private val youtubeSearchResponse: File = loadResource("payloads/youtube-search-response.json")
 
-    private val youtubeVideoResponse: File = File(javaClass.classLoader.getResource("payloads/youtube-video-response.json").file)
+    private val youtubeVideoResponse: File = loadResource("payloads/youtube-video-response.json")
 
-    private val youtubeSearchUncompleteResponse: File = File(javaClass.classLoader.getResource("payloads/youtube-search-uncomplete-response.json").file)
+    private val youtubeSearchIncompleteResponse: File = loadResource("payloads/youtube-search-incomplete-response.json")
 
     @Test
     internal fun `return 25 videos per talks searching`() {
@@ -59,7 +59,7 @@ internal class YoutubeSearchTalksTest {
                 override fun execute(): LowLevelHttpResponse {
                     val result = MockLowLevelHttpResponse()
                     result.contentType = Json.MEDIA_TYPE
-                    result.setContent(youtubeSearchUncompleteResponse.readBytes())
+                    result.setContent(youtubeSearchIncompleteResponse.readBytes())
                     return result
                 }
             }
@@ -73,6 +73,8 @@ internal class YoutubeSearchTalksTest {
             }
         }
     }
+
+    private fun loadResource(path: String) = File(javaClass.classLoader.getResource(path).file)
 
     private fun buildMockLowLevelHttpRequestBy(url: String): MockLowLevelHttpRequest {
         return when {

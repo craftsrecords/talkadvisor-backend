@@ -1,4 +1,4 @@
-package org.craftsrecords.talkadvisor.resources
+package org.craftsrecords.talkadvisor.infra.resources
 
 import org.springframework.hateoas.Identifiable
 import org.craftsrecords.talkadvisor.recommendation.profile.Profile as DomainProfile

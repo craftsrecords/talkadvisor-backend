@@ -1,4 +1,4 @@
-package org.craftsrecords.talkadvisor.resources
+package org.craftsrecords.talkadvisor.infra.resources
 
 import org.assertj.core.api.Assertions.assertThat
 import org.craftsrecords.talkadvisor.recommendation.profile.createProfile

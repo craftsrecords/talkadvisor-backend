@@ -1,6 +1,7 @@
-package org.craftsrecords.talkadvisor.resources
+package org.craftsrecords.talkadvisor.infra.resources
 
 import org.assertj.core.api.Assertions.assertThat
+import org.craftsrecords.talkadvisor.infra.resources.Preferences
 import org.craftsrecords.talkadvisor.recommendation.criteria.createPreferences
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat.CONFERENCE

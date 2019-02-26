@@ -1,4 +1,4 @@
-package org.craftsrecords.talkadvisor
+package org.craftsrecords.talkadvisor.infra
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

@@ -1,4 +1,4 @@
-package org.craftsrecords.talkadvisor.recommendation
+package org.craftsrecords.talkadvisor.infra.youtube
 
 import com.google.api.services.youtube.YouTube
 import com.google.api.services.youtube.model.SearchListResponse
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory
 import java.time.Duration
 
 
-class YoutubeSearchTalks(val youtube: YouTube, val apiKey: String) : SearchTalks {
+class YoutubeSearchTalks(private val youtube: YouTube, private val apiKey: String) : SearchTalks {
 
     private val LOG = LoggerFactory.getLogger(YoutubeSearchTalks::class.java)
 
@@ -33,7 +33,7 @@ class YoutubeSearchTalks(val youtube: YouTube, val apiKey: String) : SearchTalks
             try {
                 talks.add(toDomainTalk(iterator.next()))
             } catch (e: IllegalStateException) {
-                LOG.warn("Video skipped, cause by uncomplete data received", e)
+                LOG.warn("Video skipped, cause by incomplete received data", e)
             }
         }
 

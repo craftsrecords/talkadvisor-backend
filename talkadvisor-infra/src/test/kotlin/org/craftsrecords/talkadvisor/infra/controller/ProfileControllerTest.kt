@@ -1,6 +1,6 @@
-package org.craftsrecords.talkadvisor.controller
+package org.craftsrecords.talkadvisor.infra.controller
 
-import org.craftsrecords.talkadvisor.configurations.DomainConfiguration
+import org.craftsrecords.talkadvisor.infra.configurations.DomainConfiguration
 import org.craftsrecords.talkadvisor.recommendation.criteria.createPreferences
 import org.craftsrecords.talkadvisor.recommendation.profile.Profile
 import org.craftsrecords.talkadvisor.recommendation.spi.Profiles
