@@ -1,0 +1,353 @@
+{
+  "items": [
+    {
+      "id": {
+        "kind": "youtube#video"
+      },
+      "snippet": {
+        "title": "Hexagonal at Scale, with DDD and microservices! (Cyrille Martraire)",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/xZOO_CksS-E/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "ez9GWESKG4I"
+      },
+      "snippet": {
+        "title": "The Art of Discovering Bounded Contexts by Nick Tune",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ez9GWESKG4I/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "fQkKu4tTgCE"
+      },
+      "snippet": {
+        "title": "Field guide to DDD/CQRS using the Scala Type System and Akka by Renato Cavalcanti",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/fQkKu4tTgCE/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "TYgHtZhS1jI"
+      },
+      "snippet": {
+        "title": "Slice & Dice your Monolith with Domain Driven Design by Edson Yanaga",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/TYgHtZhS1jI/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "zzxinXTIMmo"
+      },
+      "snippet": {
+        "title": "Curing you Domain Model Anemia with Effective & Clean Tips from the Real World by Edson Yanaga",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/zzxinXTIMmo/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "K6BmGBzIqW0"
+      },
+      "snippet": {
+        "title": "From object oriented to functional domain modeling by Mario Fusco",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/K6BmGBzIqW0/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "XOyyLwyrBQU"
+      },
+      "snippet": {
+        "title": "Onion architecture with stereotypes by Alain Sahli",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/XOyyLwyrBQU/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "hkJ29ER1EZU"
+      },
+      "snippet": {
+        "title": "CQRS and EventSourcing with Spring & Axon - Nakul Mishra",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/hkJ29ER1EZU/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "EdtZnmV_D-g"
+      },
+      "snippet": {
+        "title": "The hardest part of microservices: Your Data by Christian Posta",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/EdtZnmV_D-g/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "ucDNAFoON1A"
+      },
+      "snippet": {
+        "title": "Reactive Systems with Eclipse Vert.x and Kubernetes - Voxxed Days Singapore 2018",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ucDNAFoON1A/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "WfqV7dvyoCQ"
+      },
+      "snippet": {
+        "title": "ALBERTO SALAZAR - Nowadays Architecture Trends, from Monolith to Microservices and Serverless",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/WfqV7dvyoCQ/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "1VOfcuWOuy8"
+      },
+      "snippet": {
+        "title": "CQRS and Event Sourcing with Lagom by Miel Donkers",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/1VOfcuWOuy8/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "GzrZworHpIk"
+      },
+      "snippet": {
+        "title": "Event Sourcing   You are doing it wrong by David Schmitz",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/GzrZworHpIk/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "gHqxPV_lT_I"
+      },
+      "snippet": {
+        "title": "The Language of Actors by Vaughn Vernon",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/gHqxPV_lT_I/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "bdBfbIiR95k"
+      },
+      "snippet": {
+        "title": "Microservices Data Patterns: CQRS & Event Sourcing by Edson Yanaga",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/bdBfbIiR95k/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "YPbGW3Fnmbc"
+      },
+      "snippet": {
+        "title": "Using sagas to maintain data consistency in a microservice architecture by Chris Richardson",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/YPbGW3Fnmbc/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "3V3pHm2Cpks"
+      },
+      "snippet": {
+        "title": "How Events Are Reshaping Modern Systems by Jonas Bonér",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/3V3pHm2Cpks/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "O8-Jm-QfDBA"
+      },
+      "snippet": {
+        "title": "Advanced Spring Data REST by Oliver Gierke",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/O8-Jm-QfDBA/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "x0f_GSuRFX8"
+      },
+      "snippet": {
+        "title": "Advanced Pipelines for Hypothesis-Driven Development: Smart Routers... - Edson Yanaga",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/x0f_GSuRFX8/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "eyf2Fs7GBo0"
+      },
+      "snippet": {
+        "title": "Microservices Data Patterns: CQRS & Event Sourcing by Edson Yanaga",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/eyf2Fs7GBo0/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "Ub2qhENLU3w"
+      },
+      "snippet": {
+        "title": "Developers, you should stop estimating your tasks! #noEstimates by Julien Topçu",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Ub2qhENLU3w/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "maQXoRp6BH4"
+      },
+      "snippet": {
+        "title": "State or events? Which shall I keep? - Jakub Pilimon",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/maQXoRp6BH4/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "jCmXDh2ecSY"
+      },
+      "snippet": {
+        "title": "Cracking the Code to Secure Software by Daniel Sawano and Daniel Deogun",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/jCmXDh2ecSY/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "MEySjYD86PQ"
+      },
+      "snippet": {
+        "title": "Refactoring to a System of Systems by Oliver Gierke",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/MEySjYD86PQ/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "8KgTB75VePo"
+      },
+      "snippet": {
+        "title": "Lost in transaction? Strategies to deal with (in-)consistency in modern arch... - Bernd Ruecker",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/8KgTB75VePo/default.jpg"
+          }
+        }
+      }
+    }
+  ]
+}

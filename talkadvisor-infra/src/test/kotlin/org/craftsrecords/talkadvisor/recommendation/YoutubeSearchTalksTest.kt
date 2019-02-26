@@ -22,6 +22,8 @@ internal class YoutubeSearchTalksTest {
 
     private val youtubeVideoResponse: File = File(javaClass.classLoader.getResource("payloads/youtube-video-response.json").file)
 
+    private val youtubeSearchUncompleteResponse: File = File(javaClass.classLoader.getResource("payloads/youtube-search-uncomplete-response.json").file)
+
     @Test
     internal fun `return 25 videos per talks searching`() {
         val transportStub = object : MockHttpTransport() {
@@ -32,12 +34,44 @@ internal class YoutubeSearchTalksTest {
         assertThat(talks).hasSize(25)
     }
 
+    @Test
+    internal fun `return only videos for valid talks`() {
+        val transportStub = object : MockHttpTransport() {
+            override fun buildRequest(method: String, url: String): LowLevelHttpRequest = buildUncompleteResponseMockLowLevelHttpRequestBy(url)
+        }
+        val talks = makeYoutubeSearchFor("DDD", transportStub)
+
+        assertThat(talks).hasSize(24)
+    }
+
     private fun makeYoutubeSearchFor(topicName: String, transportStub: MockHttpTransport): Set<Talk> {
         val youtube = YouTube.Builder(transportStub, JacksonFactory(), HttpRequestInitializer { })
                 .setApplicationName("TalkAdvisor")
                 .build()
         val youtubeSearchTalks = YoutubeSearchTalks(youtube, apiKey)
         return youtubeSearchTalks.forTopics(setOf(Topic(topicName)))
+    }
+
+
+    private fun buildUncompleteResponseMockLowLevelHttpRequestBy(url: String): LowLevelHttpRequest {
+        return when {
+            url.contains("search") -> object : MockLowLevelHttpRequest() {
+                override fun execute(): LowLevelHttpResponse {
+                    val result = MockLowLevelHttpResponse()
+                    result.contentType = Json.MEDIA_TYPE
+                    result.setContent(youtubeSearchUncompleteResponse.readBytes())
+                    return result
+                }
+            }
+            else -> object : MockLowLevelHttpRequest() {
+                override fun execute(): LowLevelHttpResponse {
+                    val result = MockLowLevelHttpResponse()
+                    result.contentType = Json.MEDIA_TYPE
+                    result.setContent(youtubeVideoResponse.readBytes())
+                    return result
+                }
+            }
+        }
     }
 
     private fun buildMockLowLevelHttpRequestBy(url: String): MockLowLevelHttpRequest {

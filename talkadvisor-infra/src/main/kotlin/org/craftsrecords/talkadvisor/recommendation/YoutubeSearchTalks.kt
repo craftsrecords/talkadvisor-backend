@@ -1,14 +1,19 @@
 package org.craftsrecords.talkadvisor.recommendation
 
 import com.google.api.services.youtube.YouTube
+import com.google.api.services.youtube.model.SearchListResponse
 import com.google.api.services.youtube.model.SearchResult
 import com.google.common.collect.ImmutableSet
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.spi.SearchTalks
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
+import org.slf4j.LoggerFactory
 import java.time.Duration
 
+
 class YoutubeSearchTalks(val youtube: YouTube, val apiKey: String) : SearchTalks {
+
+    private val LOG = LoggerFactory.getLogger(YoutubeSearchTalks::class.java)
 
     private val YOUTUBE_CHANNEL: String = "UCCBVCTuk6uJrN3iFV_3vurg"
 
@@ -17,7 +22,22 @@ class YoutubeSearchTalks(val youtube: YouTube, val apiKey: String) : SearchTalks
     override fun forTopics(topics: Set<Topic>): Set<Talk> {
         val searchByTopics = buildYoutubeSearchFor(topics)
         val response = searchByTopics.execute()
-        return ImmutableSet.copyOf(response.items.map { toDomainTalk(it) })
+        return convertResponseToDomainTalks(response)
+    }
+
+    private fun convertResponseToDomainTalks(response: SearchListResponse): ImmutableSet<Talk> {
+        val talks: MutableList<Talk> = mutableListOf()
+        val iterator = response.items.iterator()
+
+        while (iterator.hasNext()) {
+            try {
+                talks.add(toDomainTalk(iterator.next()))
+            } catch (e: IllegalStateException) {
+                LOG.warn("Video skipped, cause by uncomplete data received", e)
+            }
+        }
+
+        return ImmutableSet.copyOf(talks)
     }
 
     private fun buildYoutubeSearchFor(topics: Set<Topic>): YouTube.Search.List {
