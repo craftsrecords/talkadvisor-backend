@@ -12,6 +12,7 @@
     <properties>
         <spring-boot.version>2.1.3.RELEASE</spring-boot.version>
         <spring-rest-docs.version>2.0.3.RELEASE</spring-rest-docs.version>
+        <google-api-services-youtube.version>v3-rev206-1.25.0</google-api-services-youtube.version>
     </properties>
     <build>
         <plugins>
@@ -105,6 +106,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-youtube</artifactId>
+            <version>${google-api-services-youtube.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
