@@ -1,0 +1,22 @@
+== Create Profile
+This endpoint should be used to store the preferences of a regular user into a profile.
+Once stored, TalkAdvisor will automatically apply the user's profile preferences in order to propose
+the best recommendations for him.
+
+[[create-profile_http_request]]
+=== Request
+include::{snippets}/create-profile/http-request.adoc[]
+==== Headers
+include::{snippets}/create-profile/request-headers.adoc[]
+==== Fields
+include::{snippets}/create-profile/request-fields.adoc[]
+
+[[create-profile_http_response]]
+=== Response
+include::{snippets}/create-profile/http-response.adoc[]
+
+=== Trying to create a profile again
+Only one profile is permitted per user. If a user is trying to create another profile for himself,
+TalkAdvisor will return the following error:
+
+include::{snippets}/profile-already-exists/http-response.adoc[]
