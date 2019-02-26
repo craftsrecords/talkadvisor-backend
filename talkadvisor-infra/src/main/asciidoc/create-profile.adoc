@@ -14,6 +14,8 @@ include::{snippets}/create-profile/request-fields.adoc[]
 [[create-profile_http_response]]
 === Response
 include::{snippets}/create-profile/http-response.adoc[]
+==== Fields
+include::{snippets}/create-profile/response-fields.adoc[]
 
 === Trying to create a profile again
 Only one profile is permitted per user. If a user is trying to create another profile for himself,
