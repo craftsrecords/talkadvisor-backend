@@ -1,10 +1,10 @@
-package org.craftsrecords.talkadvisor.controller
+package org.craftsrecords.talkadvisor.infra.controller
 
+import org.craftsrecords.talkadvisor.infra.resources.Preferences
+import org.craftsrecords.talkadvisor.infra.resources.Profile
+import org.craftsrecords.talkadvisor.infra.resources.toResource
 import org.craftsrecords.talkadvisor.recommendation.api.CreateProfile
 import org.craftsrecords.talkadvisor.recommendation.profile.ProfileAlreadyExistsException
-import org.craftsrecords.talkadvisor.resources.Preferences
-import org.craftsrecords.talkadvisor.resources.Profile
-import org.craftsrecords.talkadvisor.resources.toResource
 import org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

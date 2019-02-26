@@ -1,4 +1,4 @@
-package org.craftsrecords.talkadvisor.configurations
+package org.craftsrecords.talkadvisor.infra.configurations
 
 import org.craftsrecords.hexarch.DomainService
 import org.craftsrecords.hexarch.Stub
