@@ -1,0 +1,14 @@
+spring:
+  output:
+    ansi.enabled: always
+
+server:
+  port: 7777
+
+talks:
+  max-number: 2
+
+youtube:
+  api:
+    base-uri: "localhost"
+    key: "API_KEY"
