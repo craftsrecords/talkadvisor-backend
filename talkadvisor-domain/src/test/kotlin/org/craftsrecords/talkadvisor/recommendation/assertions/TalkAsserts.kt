@@ -41,6 +41,10 @@ class TalksAssert(actual: Iterable<Talk>) : AbstractIterableAssert<TalksAssert, 
             TalkAssert(it) `has its duration in` range
         }
     }
+
+    infix fun `contains exactly in any order elements of`(talks: Iterable<Talk>) {
+        containsExactlyInAnyOrderElementsOf(talks)
+    }
 }
 
 class TalkAssert(actual: Talk) : AbstractAssert<TalkAssert, Talk>(

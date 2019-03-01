@@ -5,3 +5,10 @@ spring:
 server:
   port: 7777
 
+talks:
+  max-number: 25
+
+youtube:
+  api:
+    base-uri: "https://www.googleapis.com/youtube/v3/"
+    key: "API_KEY" #TODO retrieve this from the environment

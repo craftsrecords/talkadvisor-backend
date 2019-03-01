@@ -24,6 +24,7 @@ import org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import org.springframework.restdocs.payload.FieldDescriptor
 import org.springframework.restdocs.payload.PayloadDocumentation.*
 import org.springframework.restdocs.snippet.Attributes.key
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
@@ -34,6 +35,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 @ExtendWith(SpringExtension::class)
 @WebMvcTest(value = [ProfileController::class])
 @AutoConfigureRestDocs
+@ActiveProfiles("searchTalksStub")
 @Import(DomainConfiguration::class)
 internal class ProfileControllerTest {
 
