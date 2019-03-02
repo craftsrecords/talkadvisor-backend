@@ -4,23 +4,13 @@ variables:
 
 cache:
   paths:
-  - .m2/repository
-
-.validate: &validate
-  stage: build
-  script:
-  - 'mvn $MAVEN_CLI_OPTS test-compile'
+    - .m2/repository
 
 .verify: &verify
   stage: test
   script:
-  - 'mvn $MAVEN_CLI_OPTS verify'
+    - 'mvn $MAVEN_CLI_OPTS verify'
 
-validate:jdk8:
-  <<: *validate
-  image: maven:3.3.9-jdk-8
-
-# Verify merge requests using JDK8
 verify:jdk8:
   <<: *verify
   image: maven:3.3.9-jdk-8

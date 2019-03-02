@@ -25,7 +25,5 @@ enum class TalkFormat(val format: String, private val durationRange: ClosedRange
             val firstRange = IGNITE.durationRange
             return duration.coerceIn(firstRange) != firstRange.start
         }
-
     }
-
 }
