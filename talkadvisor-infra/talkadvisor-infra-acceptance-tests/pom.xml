@@ -16,7 +16,7 @@
     <build>
         <testResources>
             <testResource>
-                <directory>src/main/resources</directory>
+                <directory>src/test/resources</directory>
                 <filtering>true</filtering>
             </testResource>
         </testResources>
@@ -31,7 +31,7 @@
                         <goals>
                             <goal>reserve-network-port</goal>
                         </goals>
-                        <phase>process-resources</phase>
+                        <phase>generate-resources</phase>
                         <configuration>
                             <portNames>
                                 <portName>local.server.port</portName>
@@ -40,13 +40,12 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>copy-talkadvisor</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>test-compile</phase>
                         <goals>
                             <goal>copy</goal>
                         </goals>
@@ -70,7 +69,7 @@
                 <executions>
                     <execution>
                         <id>start-talkadvisor</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>process-test-classes</phase>
                         <goals>
                             <goal>start</goal>
                         </goals>
@@ -85,12 +84,12 @@
                                 <argument>--server.port=${local.server.port}</argument>
                             </arguments>
                             <healthcheckUrl>http://localhost:${local.server.port}/actuator/health</healthcheckUrl>
-                            <waitAfterLaunch>10</waitAfterLaunch>
+                            <waitAfterLaunch>20</waitAfterLaunch>
                         </configuration>
                     </execution>
                     <execution>
                         <id>stop-all</id>
-                        <phase>post-integration-test</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>stop-all</goal>
                         </goals>
@@ -108,7 +107,7 @@
         </dependency>
         <dependency>
             <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-junit4</artifactId>
+            <artifactId>karate-junit5</artifactId>
             <version>${karate.version}</version>
             <scope>test</scope>
         </dependency>
