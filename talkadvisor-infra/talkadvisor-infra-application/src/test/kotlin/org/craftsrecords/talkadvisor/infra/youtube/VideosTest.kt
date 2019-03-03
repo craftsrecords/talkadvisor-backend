@@ -18,7 +18,6 @@ internal class VideosTest {
         assertThat(talkBuilders).hasSize(1)
 
         val talkBuilder = talkBuilders.first()
-
         assertThat(talkBuilder.id).isEqualTo(videoId)
         assertThat(talkBuilder.title).isEqualTo(title)
         assertThatThrownBy { talkBuilder.duration }.isInstanceOf(UninitializedPropertyAccessException::class.java)

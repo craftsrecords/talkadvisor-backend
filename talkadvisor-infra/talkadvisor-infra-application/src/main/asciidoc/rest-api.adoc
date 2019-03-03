@@ -6,3 +6,6 @@
 
 //Create Profile
 include::create-profile.adoc[leveloffset=+1]
+
+//Recommendations
+include::recommendations.adoc[leveloffset=+1]

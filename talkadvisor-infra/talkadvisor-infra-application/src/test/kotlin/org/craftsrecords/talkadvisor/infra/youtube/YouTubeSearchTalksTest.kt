@@ -3,7 +3,7 @@ package org.craftsrecords.talkadvisor.infra.youtube
 import org.craftsrecords.talkadvisor.recommendation.assertions.those
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
-import org.hamcrest.core.StringStartsWith
+import org.hamcrest.Matchers.startsWith
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -66,7 +66,7 @@ internal class YouTubeSearchTalksTest {
     private fun configureMockServer() {
         this.mockServer
                 .expect(method(GET))
-                .andExpect(requestTo(StringStartsWith("localhost/search")))
+                .andExpect(requestTo(startsWith("localhost/search")))
                 .andExpect(queryParam("part", "id,snippet"))
                 .andExpect(queryParam("channelId", "UCCBVCTuk6uJrN3iFV_3vurg"))
                 .andExpect(queryParam("maxResults", "2"))
@@ -78,7 +78,7 @@ internal class YouTubeSearchTalksTest {
 
         this.mockServer
                 .expect(method(GET))
-                .andExpect(requestTo(StringStartsWith("localhost/videos")))
+                .andExpect(requestTo(startsWith("localhost/videos")))
                 .andExpect(queryParam("part", "contentDetails"))
                 .andExpect(queryParam("id", "xZOO_CksS-E,2vEoL3Irgiw"))
                 .andExpect(queryParam("fields", "items(contentDetails/duration,id)"))

@@ -1,34 +1,34 @@
 package org.craftsrecords.talkadvisor.infra.resources
 
-import org.assertj.core.api.Assertions.assertThat
-import org.craftsrecords.talkadvisor.infra.resources.Preferences
-import org.craftsrecords.talkadvisor.recommendation.criteria.createPreferences
-import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
-import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat.CONFERENCE
+import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.craftsrecords.talkadvisor.infra.resources.assertions.it
+import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
 import org.junit.jupiter.api.Test
 import org.craftsrecords.talkadvisor.recommendation.preferences.Preferences as DomainPreferences
+import org.craftsrecords.talkadvisor.recommendation.preferences.Topic as DomainTopic
 
 internal class PreferencesTest {
 
     @Test
     fun `should convert to domain preferences`() {
-        val topics = setOf(Topic("topic"))
-        val talksFormats = setOf(CONFERENCE)
+        val topics = listOf(Topic("topic"))
+        val talksFormats = listOf("CONFERENCE")
         val preferences = Preferences(topics, talksFormats)
 
         val domainPreferences: DomainPreferences = preferences.toDomainObject()
 
-        assertThat(domainPreferences.topics).isEqualTo(topics)
-        assertThat(domainPreferences.talksFormats).isEqualTo(talksFormats)
+        preferences.it `is the resource of` domainPreferences
     }
 
     @Test
-    fun `should convert domain preferences to resource`() {
-        val domainPreferences = createPreferences()
+    fun `should throw IllegalArgumentException when trying to map an unknown TalkFormat`() {
+        val topics = listOf(Topic("topic"))
+        val talksFormats = listOf("UNKNOWN")
+        val preferences = Preferences(topics, talksFormats)
 
-        val preferences = domainPreferences.toResource()
-
-        assertThat(preferences.topics).isEqualTo(domainPreferences.topics)
-        assertThat(preferences.talksFormats).isEqualTo(domainPreferences.talksFormats)
+        assertThatThrownBy { preferences.toDomainObject() }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage("No enum constant ${TalkFormat::class.java.name}.UNKNOWN")
     }
+
 }

@@ -4,4 +4,6 @@ import org.craftsrecords.talkadvisor.nextString
 import org.craftsrecords.talkadvisor.recommendation.criteria.createPreferences
 import kotlin.random.Random
 
-fun createProfile() = Profile(Random.nextString(), createPreferences())
+fun createProfile() = createProfileFor(Random.nextString())
+
+fun createProfileFor(userId: String) = Profile(userId, createPreferences())

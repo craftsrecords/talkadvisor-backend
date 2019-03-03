@@ -29,7 +29,6 @@ class ProfileController(private val createProfile: CreateProfile) {
     @ExceptionHandler(ProfileAlreadyExistsException::class)
     fun handleProfileAlreadyExistsException(response: HttpServletResponse, exception: ProfileAlreadyExistsException) {
         response.sendError(SC_CONFLICT, exception.message)
-
     }
 }
 
