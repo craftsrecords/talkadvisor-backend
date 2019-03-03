@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/youtube/search.+",
+    "queryParameters": {
+      "part": {
+        "equalTo": "id,snippet"
+      },
+      "channelId": {
+        "equalTo": "UCCBVCTuk6uJrN3iFV_3vurg"
+      },
+      "maxResults": {
+        "matches": "^\\d+$"
+      },
+      "q": {
+        "matches": "^.+$"
+      },
+      "type": {
+        "equalTo": "video"
+      },
+      "fields": {
+        "equalTo": "items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)"
+      },
+      "key": {
+        "matches": "^.+$"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json;charset=utf-8"
+    },
+    "bodyFileName": "youtube/youtube-search-response.json"
+  }
+}

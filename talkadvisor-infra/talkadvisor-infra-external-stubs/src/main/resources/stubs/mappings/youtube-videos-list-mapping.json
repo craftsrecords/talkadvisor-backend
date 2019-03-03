@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/youtube/videos.+",
+    "queryParameters": {
+      "part": {
+        "equalTo": "contentDetails"
+      },
+      "fields": {
+        "equalTo": "items(contentDetails/duration,id)"
+      },
+      "key": {
+        "matches": "^.+$"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json;charset=utf-8"
+    },
+    "bodyFileName": "youtube/youtube-videos-list-response.json"
+  }
+}
