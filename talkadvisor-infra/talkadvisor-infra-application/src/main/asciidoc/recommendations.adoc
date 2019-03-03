@@ -1,0 +1,21 @@
+== Recommendations
+Recommending talks to an user according to the preferences he has stored in his profile
+
+[[recommendations_http_request]]
+=== Request
+include::{snippets}/recommendations/http-request.adoc[]
+==== Headers
+include::{snippets}/recommendations/request-headers.adoc[]
+
+[[recommendations_http_response]]
+=== Response
+include::{snippets}/recommendations/http-response.adoc[]
+==== Fields
+include::{snippets}/recommendations/response-fields.adoc[]
+
+[[recommendations-without-profile_http_response]]
+=== Trying to get recommendation without any profile
+If the user has no profile, the following error will be returned to him:
+include::{snippets}/recommendations-without-profile/http-response.adoc[]
+
+

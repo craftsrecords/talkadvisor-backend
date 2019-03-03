@@ -28,7 +28,6 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
 
@@ -70,7 +69,6 @@ internal class ProfileControllerTest {
                 .andExpect(jsonPath("$.preferences.topics[0].name", `is`("DDD")))
                 .andExpect(jsonPath("$.preferences.topics[1].name", `is`("Hexagonal Architecture")))
                 .andExpect(jsonPath("$.preferences.talksFormats[*]", containsInAnyOrder("CONFERENCE", "QUICKIE")))
-                .andDo(print())
                 .andDo(documentCreateProfile())
 
     }
@@ -80,10 +78,9 @@ internal class ProfileControllerTest {
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
 
-                requestHeaders(
-                        headerWithName("User-Id")
-                                .description("The Id of the user who wants to create his profile")),
-
+                requestHeaders(headerWithName("User-Id")
+                        .description("The Id of the user who wants to create his profile")
+                ),
                 requestFields(criteriaDescriptor()),
                 responseFields()
                         .and(fieldWithPath("id").description("the id of the profile"))

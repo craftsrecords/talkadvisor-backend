@@ -5,7 +5,7 @@ import org.craftsrecords.talkadvisor.recommendation.preferences.Preferences
 
 
 class Profile(id: String, val preferences: Preferences) {
-    val id = notBlank(id, "Cannot create a Profile is a blank id")
+    val id: String = notBlank(id, "Cannot create a Profile is a blank id")
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

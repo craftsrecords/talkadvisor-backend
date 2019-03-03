@@ -20,7 +20,7 @@ class YouTubeSearchTalks(
         restTemplateBuilder: RestTemplateBuilder,
         @Value("\${youtube.api.base-uri}") val youtubeApiBaseUri: String,
         @Value("\${youtube.api.key}") val apiKey: String,
-        @Value("\${talks.max-number}") val maxNumberOfTalks: Int) : SearchTalks {
+        @Value("\${talks.max-number}") override val maxNumberOfTalks: Int) : SearchTalks {
 
     private val restTemplate = restTemplateBuilder.build()
     private val devoxxChannelId = "UCCBVCTuk6uJrN3iFV_3vurg"

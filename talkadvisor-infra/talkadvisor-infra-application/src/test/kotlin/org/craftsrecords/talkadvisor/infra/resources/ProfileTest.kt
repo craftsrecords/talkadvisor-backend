@@ -1,6 +1,6 @@
 package org.craftsrecords.talkadvisor.infra.resources
 
-import org.assertj.core.api.Assertions.assertThat
+import org.craftsrecords.talkadvisor.infra.resources.assertions.it
 import org.craftsrecords.talkadvisor.recommendation.profile.createProfile
 import org.junit.jupiter.api.Test
 import org.craftsrecords.talkadvisor.recommendation.profile.Profile as DomainProfile
@@ -13,7 +13,6 @@ internal class ProfileTest {
 
         val profile = domainProfile.toResource()
 
-        assertThat(profile.id).isEqualTo(domainProfile.id)
-        assertThat(profile.preferences).isEqualTo(domainProfile.preferences.toResource())
+        profile.it `is the resource of` domainProfile
     }
 }
