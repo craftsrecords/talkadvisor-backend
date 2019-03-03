@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>talkadvisor-infra-application</module>
-        <!--module>talkadvisor-infra-external-stubs</module-->
+        <module>talkadvisor-infra-external-stubs</module>
         <module>talkadvisor-infra-acceptance-tests</module>
     </modules>
     <properties>

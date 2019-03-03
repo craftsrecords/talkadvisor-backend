@@ -1,0 +1,354 @@
+{
+  "items": [
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "xZOO_CksS-E"
+      },
+      "snippet": {
+        "title": "Hexagonal at Scale, with DDD and microservices! (Cyrille Martraire)",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/xZOO_CksS-E/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "XOyyLwyrBQU"
+      },
+      "snippet": {
+        "title": "Onion architecture with stereotypes by Alain Sahli",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/XOyyLwyrBQU/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "ez9GWESKG4I"
+      },
+      "snippet": {
+        "title": "The Art of Discovering Bounded Contexts by Nick Tune",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ez9GWESKG4I/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "YPbGW3Fnmbc"
+      },
+      "snippet": {
+        "title": "Using sagas to maintain data consistency in a microservice architecture by Chris Richardson",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/YPbGW3Fnmbc/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "EdtZnmV_D-g"
+      },
+      "snippet": {
+        "title": "The hardest part of microservices: Your Data by Christian Posta",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/EdtZnmV_D-g/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "2vEoL3Irgiw"
+      },
+      "snippet": {
+        "title": "Improving your Test Driven Development in 45 minutes - Jakub Nabrdalik",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/2vEoL3Irgiw/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "fQkKu4tTgCE"
+      },
+      "snippet": {
+        "title": "Field guide to DDD/CQRS using the Scala Type System and Akka by Renato Cavalcanti",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/fQkKu4tTgCE/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "TYgHtZhS1jI"
+      },
+      "snippet": {
+        "title": "Slice &amp; Dice your Monolith with Domain Driven Design by Edson Yanaga",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/TYgHtZhS1jI/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "WfqV7dvyoCQ"
+      },
+      "snippet": {
+        "title": "ALBERTO SALAZAR - Nowadays Architecture Trends, from Monolith to Microservices and Serverless",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/WfqV7dvyoCQ/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "0Sw4EthrT9E"
+      },
+      "snippet": {
+        "title": "Building better monoliths – Implementing modulithic applications with Spring  by  Oliver Gierke",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/0Sw4EthrT9E/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "1D8hyLWMtfM"
+      },
+      "snippet": {
+        "title": "How to build an event driven, dynamically re configurable micro services platform by Sven Beauprez",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/1D8hyLWMtfM/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "pNJ_O10XaoM"
+      },
+      "snippet": {
+        "title": "Not all equals methods are created equal by Jan Ouwens",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/pNJ_O10XaoM/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "zzxinXTIMmo"
+      },
+      "snippet": {
+        "title": "Curing you Domain Model Anemia with Effective &amp; Clean Tips from the Real World by Edson Yanaga",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/zzxinXTIMmo/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "AJW2FAJGgVw"
+      },
+      "snippet": {
+        "title": "Modules or Microservices? - Sander Mak",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/AJW2FAJGgVw/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "8KgTB75VePo"
+      },
+      "snippet": {
+        "title": "Lost in transaction? Strategies to deal with (in-)consistency in modern arch... - Bernd Ruecker",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/8KgTB75VePo/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "15sWtXtKTr8"
+      },
+      "snippet": {
+        "title": "Clustered Event Sourcing and CQRS with Akka and Java - Hugh McKee",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/15sWtXtKTr8/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "3V3pHm2Cpks"
+      },
+      "snippet": {
+        "title": "How Events Are Reshaping Modern Systems by Jonas Bonér",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/3V3pHm2Cpks/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "gHqxPV_lT_I"
+      },
+      "snippet": {
+        "title": "The Language of Actors by Vaughn Vernon",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/gHqxPV_lT_I/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "Ub2qhENLU3w"
+      },
+      "snippet": {
+        "title": "Developers, you should stop estimating your tasks! #noEstimates by Julien Topçu",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Ub2qhENLU3w/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "x0f_GSuRFX8"
+      },
+      "snippet": {
+        "title": "Advanced Pipelines for Hypothesis-Driven Development: Smart Routers... - Edson Yanaga",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/x0f_GSuRFX8/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "5A8g11-np10"
+      },
+      "snippet": {
+        "title": "Building a Resilient, Secure, and Maintainable API Platform using Finagle  by  Alessandro Vermeulen",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/5A8g11-np10/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "PFQnNFe27kU"
+      },
+      "snippet": {
+        "title": "Principles Of Microservices by Sam Newman",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/PFQnNFe27kU/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "MEySjYD86PQ"
+      },
+      "snippet": {
+        "title": "Refactoring to a System of Systems by Oliver Gierke",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/MEySjYD86PQ/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "x_9OJKAv-ic"
+      },
+      "snippet": {
+        "title": "REST beyond the obvious   API design for ever evolving systems by Oliver Gierke",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/x_9OJKAv-ic/default.jpg"
+          }
+        }
+      }
+    },
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "UrsjeR-tGrg"
+      },
+      "snippet": {
+        "title": "Find and Track the hidden vulnerabilities inside your dependencies by Julien Topçu",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/UrsjeR-tGrg/default.jpg"
+          }
+        }
+      }
+    }
+  ]
+}
