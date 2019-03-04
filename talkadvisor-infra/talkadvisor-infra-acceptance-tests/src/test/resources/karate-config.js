@@ -1,6 +1,9 @@
 function fn(){
+    var baseUrl = "http://localhost:@local.server.port@"
     var config = {
-       talkAdvisorUrl: "http://localhost:@local.server.port@"
+       talkAdvisorUrl: baseUrl,
+       profilesUrl: baseUrl + '/profiles/',
+       recommendationsUrl : baseUrl + '/recommendations/'
     };
     return config
 }

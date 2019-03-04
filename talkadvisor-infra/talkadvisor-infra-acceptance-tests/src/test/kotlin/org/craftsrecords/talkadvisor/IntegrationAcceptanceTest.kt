@@ -6,6 +6,6 @@ class IntegrationAcceptanceTest {
 
     @Karate.Test
     fun tests(): Karate {
-        return Karate().relativeTo(this::class.java)
+        return Karate().relativeTo(this::class.java).tags("~@ignore", "~@request")
     }
 }

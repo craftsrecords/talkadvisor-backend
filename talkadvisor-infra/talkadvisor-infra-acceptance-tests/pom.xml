@@ -82,6 +82,7 @@
                                     ${project.build.directory}/dependency/talkadvisor.jar
                                 </argument>
                                 <argument>--server.port=${local.server.port}</argument>
+                                <argument>--spring.profiles.active=YouTubeStub</argument>
                             </arguments>
                             <healthcheckUrl>http://localhost:${local.server.port}/actuator/health</healthcheckUrl>
                             <waitAfterLaunch>20</waitAfterLaunch>

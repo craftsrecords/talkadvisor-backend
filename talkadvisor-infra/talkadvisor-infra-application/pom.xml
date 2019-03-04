@@ -23,6 +23,14 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <requiresUnpack>
+                                <dependency>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>talkadvisor-infra-external-stubs</artifactId>
+                                </dependency>
+                            </requiresUnpack>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -83,9 +91,15 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>org.craftsrecords</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>talkadvisor-domain</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>talkadvisor-infra-external-stubs</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
