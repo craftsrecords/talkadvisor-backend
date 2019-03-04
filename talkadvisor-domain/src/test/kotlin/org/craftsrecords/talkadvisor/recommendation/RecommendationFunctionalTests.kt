@@ -5,5 +5,5 @@ import cucumber.api.junit.Cucumber
 import org.junit.runner.RunWith
 
 @RunWith(Cucumber::class)
-@CucumberOptions(strict = true, plugin = ["pretty", "html:target/cucumber"], features = ["classpath:features/recommendations.feature"])
+@CucumberOptions(strict = true, plugin = ["pretty", "json:target/cucumber/recommendation.json"], features = ["classpath:features/recommendations.feature"])
 class RecommendationFunctionalTests

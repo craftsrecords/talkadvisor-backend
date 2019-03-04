@@ -22,7 +22,6 @@
         <kotlin.version>1.3.21</kotlin.version>
         <junit.jupiter.version>5.4.0</junit.jupiter.version>
         <junit.version>4.12</junit.version>
-        <cucumber.version>4.2.3</cucumber.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit-platform.version>1.4.0</junit-platform.version>
     </properties>
@@ -224,10 +223,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -286,18 +281,6 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-junit</artifactId>
-                <version>${cucumber.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-java8</artifactId>
-                <version>${cucumber.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-reflect</artifactId>
                 <version>${kotlin.version}</version>
@@ -331,12 +314,6 @@
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>3.11.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-picocontainer</artifactId>
-                <version>4.2.3</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

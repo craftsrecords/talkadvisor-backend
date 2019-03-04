@@ -7,7 +7,7 @@ import org.junit.runner.RunWith
 @RunWith(Cucumber::class)
 @CucumberOptions(
         strict = true,
-        plugin = ["pretty", "html:target/cucumber"],
+        plugin = ["pretty", "json:target/cucumber/profile.json"],
         features = ["classpath:features/profiles.feature"],
         glue = ["classpath:org.craftsrecords.talkadvisor.recommendation.stepdefs"])
 class ProfileFunctionalTests

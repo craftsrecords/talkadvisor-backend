@@ -11,4 +11,4 @@ talks:
 youtube:
   api:
     base-uri: "https://www.googleapis.com/youtube/v3/"
-    key: "API_KEY" #TODO retrieve this from the environment
+    key: ${GOOGLE_API_KEY:"API_KEY"}
