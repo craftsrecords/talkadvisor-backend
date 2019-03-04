@@ -11,6 +11,10 @@
     <artifactId>talkadvisor-infra-application</artifactId>
     <properties>
         <spring-rest-docs.version>2.0.3.RELEASE</spring-rest-docs.version>
+        <spring-hateoas.version>0.25.1.RELEASE</spring-hateoas.version>
+        <spring-cloud-contract-verifier.version>2.1.0.RELEASE</spring-cloud-contract-verifier.version>
+        <spring-cloud-dependencies.version>Greenwich.RELEASE</spring-cloud-dependencies.version>
+        <spring-mock-mvc.version>3.0.0</spring-mock-mvc.version>
     </properties>
     <build>
         <plugins>
@@ -87,6 +91,17 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-contract-maven-plugin</artifactId>
+                <version>1.2.4.RELEASE</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <baseClassForTests>
+                        org.craftsrecords.talkadvisor.infra.contract.BaseContractClass
+                    </baseClassForTests>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -141,7 +156,39 @@
         <dependency>
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
-            <version>0.25.1.RELEASE</version>
+            <version>${spring-hateoas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-contract-verifier</artifactId>
+            <version>${spring-cloud-contract-verifier.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>spring-mock-mvc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.rest-assured</groupId>
+                    <artifactId>json-path</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.rest-assured</groupId>
+                    <artifactId>xml-path</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}E</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
