@@ -7,6 +7,6 @@ import org.craftsrecords.talkadvisor.recommendation.profile.Profile as DomainPro
 class ProfileAssert(actual: Profile) : AbstractAssert<ProfileAssert, Profile>(actual, ProfileAssert::class.java) {
     infix fun `is the resource of`(domainProfile: DomainProfile) {
         matches({ it.id == domainProfile.id }, "Profile resource id corresponds to the one of the DomainProfile")
-        satisfies { profile -> profile.preferences.it `is the resource of` domainProfile.preferences }
+        satisfies { profile -> profile.preferences.that `is the resource of` domainProfile.preferences }
     }
 }

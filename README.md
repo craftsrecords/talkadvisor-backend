@@ -42,24 +42,52 @@ You can also use: ``--GOOGLE_API_KEY=`` in the command line if you don't want to
 
 ### Development mode
 If you don't want to generate a Google Api Token, you can launch TalkAdvisor with an embedded wiremock which will [stub YouTube](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-external-stubs/src/main/kotlin/org/craftsrecords/talkadvisor/infra/externalstubs/ExternalStubsApplicationInitializer.kt``````) by adding ``--spring.profiles.active=YouTubeStub`` to the command line.
-You can also use the [search talk domain stub](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/main/kotlin/org/craftsrecords/talkadvisor/recommendation/spi/stubs/HardCodedTalksSearcher.kt) with ``--spring.profiles.active=searchTalksStub``, 
-it will stub TalkAdvisor at the SPI level so http calls will be made and no wiremock instance will be launched.
+You can also use the [search talk domain stub](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/main/kotlin/org/craftsrecords/talkadvisor/recommendation/spi/stubs/HardCodedTalksSearcher.kt) with ``--spring.profiles.active=searchTalksStub``, it will stub TalkAdvisor at the SPI level so http calls will be made and no wiremock instance will be launched.
 
- 
+## Technical Overview
+
+TalkAdvisor is composed of 4 different modules:
+
+### talkadvisor-domain the inside of the hexagon
+
+This single module holds all the business value of the application where you find its aggregate [Recommendation](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/main/kotlin/org/craftsrecords/talkadvisor/recommendation/Recommendation.kt).
+[Maven has been configured](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/pom.xml) such a way to prevent any external artifacts from being imported in the domain:
+
+```xml
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>*</exclude> <!-- forbids non domain dependencies -->
+                                    </excludes>
+                                    <includes>
+                                        <!-- but allow kotlin dependencies-->
+                                        <include>org.jetbrains.kotlin:*</include>
+                                        <include>org.jetbrains:annotations</include>
+                                        <!-- and commons-lang3 because we don't want to make the wheel again -->
+                                        <include>org.apache.commons:commons-lang3</include>
+                                        <!-- and test dependencies-->
+                                        <include>*:*:*:*:test</include>
+                                    </includes>
+                                </bannedDependencies>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+```
+
+if any dependency is added to the pom, the build will fail if it is not allowed in this list.
+
+### talkadvisor-infra the outside of the hexagon
+//TODO Document it
 ## Testing Strategy
-![Testing Strategy](testing-strategy.png)
 
-### Unit Test and Test Composition:
-
-For example in the resources, when testing the mapping of a Profile Domain to a Profile Resource,
-we don't add a unit test inside resources.PreferencesTest to verify the mapping of a Preferences Resource 
-since the Profile, which contains it, will test it by composition 
-#### Custom Assertions
-[TALK] talk about custom assert and factories
-
-Custom asserts in the adapters: Mapping a domain object to an adapter one can be done in several places
-Storing the mapping validation inside a custom assert will ensure no mapping tests will miss a new acceptance criteria.
-TODO: GIVE AN EXAMPLE IN THE CODE
-
-##Improvement
-use Topics, Talks etc. classes instead of Iterable<Set>, Iterable<Talk>...
+If you wan to learn more on the testing strategy applied in TalkAdvisor, [here](TestingStrategy.md) is the dedicated documentation.

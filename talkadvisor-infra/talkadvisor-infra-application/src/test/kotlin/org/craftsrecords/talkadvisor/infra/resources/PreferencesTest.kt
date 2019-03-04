@@ -1,7 +1,7 @@
 package org.craftsrecords.talkadvisor.infra.resources
 
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.craftsrecords.talkadvisor.infra.resources.assertions.it
+import org.craftsrecords.talkadvisor.infra.resources.assertions.that
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
 import org.junit.jupiter.api.Test
 import org.craftsrecords.talkadvisor.recommendation.preferences.Preferences as DomainPreferences
@@ -17,7 +17,7 @@ internal class PreferencesTest {
 
         val domainPreferences: DomainPreferences = preferences.toDomainObject()
 
-        preferences.it `is the resource of` domainPreferences
+        preferences.that `is the resource of` domainPreferences
     }
 
     @Test

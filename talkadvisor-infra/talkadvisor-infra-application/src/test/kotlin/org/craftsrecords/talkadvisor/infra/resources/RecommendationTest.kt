@@ -1,6 +1,6 @@
 package org.craftsrecords.talkadvisor.infra.resources
 
-import org.craftsrecords.talkadvisor.infra.resources.assertions.it
+import org.craftsrecords.talkadvisor.infra.resources.assertions.that
 import org.craftsrecords.talkadvisor.recommendation.createRecommendation
 import org.junit.jupiter.api.Test
 
@@ -12,6 +12,6 @@ internal class RecommendationTest {
 
         val recommendation = domainRecommendation.toResource()
 
-        recommendation.it `is the resource of` domainRecommendation
+        recommendation.that `is the resource of` domainRecommendation
     }
 }
