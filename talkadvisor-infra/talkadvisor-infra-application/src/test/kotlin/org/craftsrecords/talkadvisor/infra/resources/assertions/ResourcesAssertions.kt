@@ -2,23 +2,23 @@ package org.craftsrecords.talkadvisor.infra.resources.assertions
 
 import org.craftsrecords.talkadvisor.infra.resources.*
 
-val Preferences.it: PreferencesAssert
+val Preferences.that: PreferencesAssert
     get() = PreferencesAssert(this)
 
 val Iterable<Talk>.those: TalksAssert
     get() = TalksAssert(this)
 
-val Talk.it: TalkAssert
+val Talk.that: TalkAssert
     get() = TalkAssert(this)
 
 val Iterable<Topic>.those: TopicsAssert
     get() = TopicsAssert(this)
 
-val Topic.it: TopicAssert
+val Topic.that: TopicAssert
     get() = TopicAssert(this)
 
-val Profile.it: ProfileAssert
+val Profile.that: ProfileAssert
     get() = ProfileAssert(this)
 
-val Recommendation.it: RecommendationAssert
+val Recommendation.that: RecommendationAssert
     get() = RecommendationAssert(this)

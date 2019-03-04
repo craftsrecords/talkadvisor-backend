@@ -31,8 +31,8 @@
                                         <!-- but allow kotlin dependencies-->
                                         <include>org.jetbrains.kotlin:*</include>
                                         <include>org.jetbrains:annotations</include>
+                                        <!-- and commons-lang3 because we don't want to make the wheel again -->
                                         <include>org.apache.commons:commons-lang3</include>
-                                        <include>com.google.code.findbugs:jsr305</include>
                                         <!-- and test dependencies-->
                                         <include>*:*:*:*:test</include>
                                     </includes>

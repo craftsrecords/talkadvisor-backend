@@ -18,7 +18,7 @@ class TopicsAssert(actual: Iterable<Topic>) : AbstractIterableAssert<TopicsAsser
     infix fun `are the resources of`(domainTopics: Set<DomainTopic>) {
         hasSameSizeAs(domainTopics)
         satisfies {
-            it.forEachIndexed { index, topic -> topic.it `is the resource of` domainTopics.elementAt(index) }
+            it.forEachIndexed { index, topic -> topic.that `is the resource of` domainTopics.elementAt(index) }
         }
     }
 }

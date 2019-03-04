@@ -18,7 +18,7 @@ class TalksAssert(actual: Iterable<Talk>) : AbstractIterableAssert<TalksAssert, 
     infix fun `are the resources of`(domainTalks: Set<DomainTalk>) {
         hasSameSizeAs(domainTalks)
         satisfies {
-            it.forEachIndexed { index, topic -> topic.it `is the resource of` domainTalks.elementAt(index) }
+            it.forEachIndexed { index, topic -> topic.that `is the resource of` domainTalks.elementAt(index) }
         }
     }
 }
