@@ -8,8 +8,7 @@ import org.craftsrecords.talkadvisor.recommendation.spi.Profiles
 @DomainService
 class ProfileCreator(private val profiles: Profiles) : CreateProfile {
     override fun forUserWithPreferences(userId: String, preferences: Preferences): Profile {
-        val profile = Profile(userId, preferences)
         profiles.fetch(userId)?.let { throw ProfileAlreadyExistsException(userId) }
-        return profiles.save(profile)
+        return profiles.save(Profile(userId, preferences))
     }
 }
