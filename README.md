@@ -44,6 +44,14 @@ You can also use: ``--GOOGLE_API_KEY=`` in the command line if you don't want to
 If you don't want to generate a Google Api Token, you can launch TalkAdvisor with an embedded wiremock which will [stub YouTube](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-external-stubs/src/main/kotlin/org/craftsrecords/talkadvisor/infra/externalstubs/ExternalStubsApplicationInitializer.kt``````) by adding ``--spring.profiles.active=YouTubeStub`` to the command line.
 You can also use the [search talk domain stub](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/main/kotlin/org/craftsrecords/talkadvisor/recommendation/spi/stubs/HardCodedTalksSearcher.kt) with ``--spring.profiles.active=searchTalksStub``, it will stub TalkAdvisor at the SPI level so http calls will be made and no wiremock instance will be launched.
 
+## Living Documentation
+
+Once TalkAdvisor is running, you can reach the documentation of the REST API with this URL
+
+```
+http://localhost:7777/docs/rest-api.html
+```
+
 ## Technical Overview
 
 TalkAdvisor is composed of 4 different modules:
@@ -87,7 +95,28 @@ This single module holds all the business value of the application where you fin
 if any dependency is added to the pom, the build will fail if it is not allowed in this list.
 
 ### talkadvisor-infra the outside of the hexagon
-//TODO Document it
+
+All the adapters are gathered in the talkadvisor-infra modules. talkadvisor-infra is a parent pom which centralizes the common configurations of all the adapters (Spring Boot BOM,...).
+The infrastructure is divided in 3 modules.
+
+#### talkadvisor-infra-application
+
+The whole application resides in this module. You can find here the [controllers](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/tree/master/talkadvisor-infra/talkadvisor-infra-application/src/main/kotlin/org/craftsrecords/talkadvisor/infra/controller), 
+the [YouTube Client](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/tree/master/talkadvisor-infra/talkadvisor-infra-application/src/main/kotlin/org/craftsrecords/talkadvisor/infra/youtube) (SPI Adapter),
+the [REST resources](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/tree/master/talkadvisor-infra/talkadvisor-infra-application/src/main/kotlin/org/craftsrecords/talkadvisor/infra/resources) (API Adapter), 
+and the [Spring Boot Application](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-application/src/main/kotlin/org/craftsrecords/talkadvisor/infra/TalkAdvisorApplication.kt).
+
+#### talkadvisor-infra-external-stubs
+
+Holds the [stubs of the external services](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-external-stubs/src/main/kotlin/org/craftsrecords/talkadvisor/infra/externalstubs/ExternalStubsApplicationInitializer.kt), basically this is a [wiremock-based](http://wiremock.org/docs/) infrastructure where have been stored some responses payloads of the request we make to YouTube.
+Those stubs are launched during the [integration acceptance tests](#talkadvisor-infra-acceptance-tests) in order to totally isolate the CICD build of TalkAdvisor.
+They can also be used to run the application, see [Running the application](#running-the-application).
+
+#### talkadvisor-infra-acceptance-tests
+
+Integration acceptance and end to end tests of the application. They are launched at each builds against a local instance of TalkAdvisor with the external stubs.
+The end to end tests can also be launched against a deployed instance plugged with real calls to YouTube, see [launching the end to end tests](#launching-the-end-to-end-tests).
+
 ## Testing Strategy
 
 If you wan to learn more on the testing strategy applied in TalkAdvisor, [here](TestingStrategy.md) is the dedicated documentation.
