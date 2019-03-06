@@ -9,7 +9,7 @@ import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
 class TestContext {
     lateinit var requestedTopics: Set<Topic>
     lateinit var requestedTalksFormats: Set<TalkFormat>
-    lateinit var recommendationResult: Recommendation
+    lateinit var recommendation: Recommendation
     lateinit var userId: String
     lateinit var createdProfile: Profile
     lateinit var requestedPreferences: Preferences
