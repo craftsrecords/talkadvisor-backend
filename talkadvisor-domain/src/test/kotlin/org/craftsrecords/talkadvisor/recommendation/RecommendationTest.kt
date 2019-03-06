@@ -2,6 +2,7 @@ package org.craftsrecords.talkadvisor.recommendation
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.craftsrecords.talkadvisor.EntityTest
 import org.craftsrecords.talkadvisor.recommendation.criteria.Criteria
 import org.craftsrecords.talkadvisor.recommendation.criteria.GuestCriteria
 import org.craftsrecords.talkadvisor.recommendation.criteria.createCriteria
@@ -14,7 +15,25 @@ import org.junit.jupiter.api.Test
 import java.time.Duration
 import java.util.*
 
-internal class RecommendationTest {
+internal class RecommendationTest : EntityTest<Recommendation> {
+
+    override fun createEqualEntities(): Pair<Recommendation, Recommendation> {
+        val id = UUID.randomUUID()
+        val criteria = createCriteria()
+        return Pair(
+                Recommendation(id, criteria = criteria, talks = createTalks(criteria)),
+                Recommendation(id, criteria = criteria, talks = createTalks(criteria))
+        )
+    }
+
+    override fun createNonEqualEntities(): Pair<Recommendation, Recommendation> {
+        val (criteria, talks) = bootstrap()
+        return Pair(
+                Recommendation(criteria = criteria, talks = talks),
+                Recommendation(criteria = criteria, talks = talks)
+        )
+    }
+
     @Test
     fun `should create a recommendation`() {
         val (criteria, talks) = bootstrap()
@@ -51,30 +70,6 @@ internal class RecommendationTest {
         talks.add(newTalk)
 
         assertThat(recommendation.talks).doesNotContain(newTalk)
-    }
-
-    @Test
-    fun `should satisfy entity equality`() {
-        val id = UUID.randomUUID()
-        val criteria = createCriteria()
-
-        val recommendation1 = Recommendation(id, criteria = criteria, talks = createTalks(criteria))
-        val recommendation2 = Recommendation(id, criteria = criteria, talks = createTalks(criteria))
-
-        assertThat(recommendation1).isEqualTo(recommendation2)
-        assertThat(recommendation1.hashCode()).isEqualTo(recommendation2.hashCode())
-    }
-
-    @Test
-    fun `should satisfy entity inequality`() {
-
-        val (criteria, talks) = bootstrap()
-
-        val recommendation1 = Recommendation(criteria = criteria, talks = talks)
-        val recommendation2 = Recommendation(criteria = criteria, talks = talks)
-
-        assertThat(recommendation1).isNotEqualTo(recommendation2)
-        assertThat(recommendation1.hashCode()).isNotEqualTo(recommendation2.hashCode())
     }
 
     private fun bootstrap(): Pair<Criteria, Set<Talk>> {
