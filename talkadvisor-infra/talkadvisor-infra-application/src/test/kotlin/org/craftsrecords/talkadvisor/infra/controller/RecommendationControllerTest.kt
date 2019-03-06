@@ -1,9 +1,11 @@
 package org.craftsrecords.talkadvisor.infra.controller
 
 import org.craftsrecords.talkadvisor.infra.configurations.DomainConfiguration
-import org.craftsrecords.talkadvisor.recommendation.profile.createProfileFor
+import org.craftsrecords.talkadvisor.recommendation.preferences.Preferences
+import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
+import org.craftsrecords.talkadvisor.recommendation.profile.Profile
 import org.craftsrecords.talkadvisor.recommendation.spi.Profiles
-import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
+import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat.*
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -96,7 +98,7 @@ internal class RecommendationControllerTest {
                                 .attributes(key("constraints").value("formatted in the ISO-8601 standard")))
                         .and(fieldWithPath("talks[].format")
                                 .description("the format of the talk")
-                                .attributes(key("constraints").value("Possible values: ${TalkFormat.values().contentToString()}"))))
+                                .attributes(key("constraints").value("Possible values: ${values().contentToString()}"))))
     }
 
     private fun MvcResult.extractIdFromLocationHeader(): String {
@@ -104,7 +106,12 @@ internal class RecommendationControllerTest {
     }
 
     private fun bootstrapProfileFor(userId: String) {
-        profiles.save(createProfileFor(userId))
+        profiles.save(createProfile(userId))
+    }
+
+    private fun createProfile(userId: String): Profile {
+        return Profile(id = userId,
+                preferences = Preferences(setOf(Topic("DDD"), Topic("Hexagonal Architecture")), setOf(CONFERENCE, QUICKIE)))
     }
 
     @Test

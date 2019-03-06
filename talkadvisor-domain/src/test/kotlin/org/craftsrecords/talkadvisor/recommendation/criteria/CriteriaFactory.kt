@@ -7,6 +7,6 @@ import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
 fun createPreferences() =
         Preferences(
                 setOf(Topic("DDD"), Topic("Hexagonal Architecture")),
-                setOf(TalkFormat.CONFERENCE, TalkFormat.QUICKIE))
+                setOf(TalkFormat.values().random(), TalkFormat.QUICKIE, TalkFormat.IGNITE))
 
 fun createCriteria(): Criteria = createPreferences()

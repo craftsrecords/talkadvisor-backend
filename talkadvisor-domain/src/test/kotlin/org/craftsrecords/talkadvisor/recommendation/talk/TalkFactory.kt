@@ -1,6 +1,7 @@
 package org.craftsrecords.talkadvisor.recommendation.talk
 
 import org.craftsrecords.talkadvisor.recommendation.criteria.Criteria
+import java.time.Duration
 import java.time.Duration.ofMinutes
 import java.util.*
 import kotlin.random.Random
@@ -19,10 +20,14 @@ fun createTalk(): Talk {
     return prepareBuilder().apply { duration = ofMinutes(Random.nextLong(2, 120)) }.build()
 }
 
-private fun durationFrom(criteria: Criteria) = criteria.talksFormats.random().durationRange.start
+private fun durationFrom(criteria: Criteria) = criteria.talksFormats.random().randomDuration()
 private fun prepareBuilder(): Talk.Builder {
     return Talk.with {
         id = UUID.randomUUID().toString()
         title = "title ${Random.nextInt()}"
     }
+}
+
+private fun TalkFormat.randomDuration(): Duration {
+    return durationRange.start.plusSeconds(Random.nextLong(1, 59))
 }
