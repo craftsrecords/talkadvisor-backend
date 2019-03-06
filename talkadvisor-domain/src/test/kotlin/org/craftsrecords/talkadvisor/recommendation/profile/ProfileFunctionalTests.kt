@@ -8,6 +8,6 @@ import org.junit.runner.RunWith
 @CucumberOptions(
         strict = true,
         plugin = ["pretty", "json:target/cucumber/profile.json"],
-        features = ["classpath:features/profiles.feature"],
+        features = ["classpath:features/creating-a-profile.feature"],
         glue = ["classpath:org.craftsrecords.talkadvisor.recommendation.stepdefs"])
 class ProfileFunctionalTests

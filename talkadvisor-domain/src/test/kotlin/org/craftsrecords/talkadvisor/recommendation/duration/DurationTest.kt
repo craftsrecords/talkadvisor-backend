@@ -6,7 +6,7 @@ import java.time.Duration.ZERO
 import java.time.Duration.ofMinutes
 
 
-internal class DurationExtensionTest {
+internal class DurationTest {
     @Test
     fun `should be positive when greater than zero`() {
         assertThat(ofMinutes(5).isPositive()).isTrue()
