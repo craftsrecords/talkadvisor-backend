@@ -26,8 +26,7 @@ class TalksAdvisor(private val searchTalks: SearchTalks,
 
     private fun recommendTalksSatisfying(criteria: Criteria): Recommendation {
         val talks = retrieveTalksSatisfying(criteria)
-        val recommendation = Recommendation(criteria = criteria, talks = talks)
-        return recommendations.save(recommendation)
+        return recommendations.save(Recommendation(criteria = criteria, talks = talks))
     }
 
     private fun retrieveTalksSatisfying(criteria: Criteria): Set<Talk> {
