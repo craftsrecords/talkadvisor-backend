@@ -17,7 +17,7 @@ class RecommendationStepdefs(private val testContext: TestContext,
 
         val recommendation = recommendTalks satisfying guestCriteria
 
-        testContext.recommendationResult = recommendation
+        testContext.recommendation = recommendation
     }
 
     @When("^he asks for a recommendation$")
@@ -27,7 +27,7 @@ class RecommendationStepdefs(private val testContext: TestContext,
 
             val recommendation = recommendTalks to user
 
-            testContext.recommendationResult = recommendation
+            testContext.recommendation = recommendation
         } catch (e: Exception) {
             testContext.error = e
         }
@@ -35,21 +35,21 @@ class RecommendationStepdefs(private val testContext: TestContext,
 
     @Then("^talkadvisor recommends some talks$")
     fun `talkadvisor recommends some talks`() {
-        val recommendation = testContext.recommendationResult
+        val recommendation = testContext.recommendation
 
         recommendation.that.hasTalks()
     }
 
     @Then("^the recommended talks are related to (.+)")
     fun `the recommended talks are related to`(topic: String) {
-        val recommendation = testContext.recommendationResult
+        val recommendation = testContext.recommendation
 
         recommendation.that `has talks related to` topic
     }
 
     @Then("^all the talks corresponding to the (.+) format have a duration between (\\d+) and (\\d+) minutes$")
     fun `all the talks corresponding to the format have a duration in range`(format: String, minDuration: Long, maxDuration: Long) {
-        val recommendation = testContext.recommendationResult
+        val recommendation = testContext.recommendation
         val talkFormat = TalkFormat.valueOf(format)
         val range = ofMinutes(minDuration).rangeTo(ofMinutes(maxDuration))
 
@@ -59,7 +59,7 @@ class RecommendationStepdefs(private val testContext: TestContext,
 
     @Then("^the recommended talks correspond to his preferences$")
     fun `the recommended talks correspond to his preferences`() {
-        val recommendation = testContext.recommendationResult
+        val recommendation = testContext.recommendation
         val profile = testContext.createdProfile
         val preferences = profile.preferences
 
