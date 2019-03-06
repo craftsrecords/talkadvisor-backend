@@ -2,6 +2,8 @@ Feature: End-To-End Test
 
   Background:
     * def generateId = function(){ return Math.random().toString(36).substring(2) }
+    # As a prerequisite, TalkAdvisor should be running and healthy
+    * call read('health.feature')
 
   @e2e
   Scenario: Executing the complete workflow
