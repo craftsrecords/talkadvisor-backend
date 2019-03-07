@@ -4,6 +4,8 @@
 TalkAdvisor is a [hexagonal architecture](https://beyondxscratch.com/2017/08/19/decoupling-your-technical-code-from-your-business-logic-with-the-hexagonal-architecture-hexarch) demo application developed with Kotlin and SpringBoot.
 This application recommends IT Talks recorded on YouTube given some criteria
 
+![Hexagonal Architecture](images/hexagonal-architecture.png)
+
 ## Build  
 
 To build TalkAdvisor, run the following command:
@@ -120,3 +122,14 @@ The end to end tests can also be launched against a deployed instance plugged wi
 ## Testing Strategy
 
 If you wan to learn more on the testing strategy applied in TalkAdvisor, [here](TestingStrategy.md) is the dedicated documentation.
+
+## Contributors
+
+Julien Topçu - @JulienTopcu
+Jordan Nourry - @JkNourry
+Juliette de Rancourt - @ju_derancourt 
+
+From craftsrecords.org
+
+## Special Credit
+TalkAdvisor Project Icon made by Freepik from www.flaticon.com 

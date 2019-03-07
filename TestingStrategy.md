@@ -1,4 +1,8 @@
 # Testing Strategy
+>
+> Work In Progress !!! Infrastructure Level tests are not documented yet.
+>
+
 TalkAdvisor is following the [microservice testing philosophy](https://martinfowler.com/articles/microservice-testing/#conclusion-summary).
 We will try here to explain how to get a cleaner test strategy in a microservice implemented according to the Hexagonal Architecture.
 
@@ -28,7 +32,7 @@ But testing the contract of a web API with it, can be really cu-cumbersome and t
 
 Back to the basics, since the aim of a functional test is "testing the business logic", putting it inside the domain of our application looks like a good idea. As a result instead of calling the endpoints, those tests are plugged in top of the API of the domain (not the Web API one).
 
-![Functional Tests in the Hexagonal Architecture](images/hexagon-implementation.png)
+![Functional Tests in the Hexagonal Architecture](images/hexagon-stubbed.png)
 
 In TalkAdvisor, [Cucumber](https://docs.cucumber.io/) is used to define the features and the scenarios of our business logic. As you can see the feature files are located in [the tests packages of the domain](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/tree/master/talkadvisor-domain/src/test/resources/features) beside the [step definitions](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/tree/master/talkadvisor-domain/src/test/kotlin/org/craftsrecords/talkadvisor/recommendation/stepdefs).
 Using the [Gherkin language](https://docs.cucumber.io/gherkin/reference/), we express the scenarios of a feature [creating-a-profile.feature](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/test/resources/features/creating-a-profile.feature):
@@ -140,24 +144,221 @@ Why not only a Mock inside the tests ? The domain stub is more that just a testi
 Actually in TalkAvisor, only the SPI part related to the provisioning of the Talks has been implemented through a YouTube client. The repositories which are used to store our profiles and recommendations are implemented using HashMaps e.g. [InMemoryProfiles](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/main/kotlin/org/craftsrecords/talkadvisor/recommendation/spi/stubs/InMemoryProfiles.kt).
 This way we can focus on the main purpose of the application - recommending talks - and delay some technical concern like "what will be the best database system for my software ?".
 
-![Functional Tests in the Hexagonal Architecture](images/hexagon-implementation.png)
+![Functional Tests in the Hexagonal Architecture](images/hexagon-stubbed.png)
 
-## Unit Tests and Test Composition:
+### Low-Level Assertions Caveat
 
-TODO SOMETHING ABOUT NOT HAVING MOCKITO IN THE DOMAIN
+Assertions frameworks like [AssertJ](http://joel-costigliola.github.io/assertj/) are widely spread now. They are offering a fluent way of writing our acceptance criteria.
+TalkAdvisor has to make sure that talks which belong to a recommendation are related to the topics of the user preferences. In the MVP of our application, we will consider a [talk](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/main/kotlin/org/craftsrecords/talkadvisor/recommendation/talk/Talk.kt) is related to a topic
+if its title contains the given topic. In the different tests where we want to check this post-condition, we will end-up with something like this:
+```kotlin
+//Talk level tests assertion
+assertThat(talk.title).contains("topic")
 
-For example in the resources, when testing the mapping of a Profile Domain to a Profile Resource,
-we don't add a unit test inside resources.PreferencesTest to verify the mapping of a Preferences Resource 
-since the Profile, which contains it, will test it by composition 
+//Recommendation level tests assertion
+assertThat(recommendation.talks.map { it.title }).anyMatch{ it.contains("topic") } 
+```
+
+First we lost the intend of the test, it will require some thought for someone who doesn't know the project why - the hell - we are checking a talk is containing the requested topic.
+But that's not the only caveat. If now we have this new requirement "We consider a talk is related to a topic, if its title AND its description contains the topic", we will have to update all the tests
+which are responsible to verify (may be at different levels) this new requirement. We can add the new assertion on the first test but leave the second one as it and all the tests will pass.
+In that case we may have a functional hole on the recommendation side, but everyone is reviewing all the tests of the application each time a new business rule is added right?..
+
+To fix the problem, with the help of some Domain-Driven Design & Clean Code concepts, we will **encapsulate** the acceptance criteria - the second assertion is btw violating the encapsulation of the recommendation.
+This way those "encapsulations" will be reused so it will ensure that every tests which requires the same acceptance criteria will be checked the same way.
+But where ? In the production code? No, we will use custom assertions.
+
 ### Custom Assertions
-[TALK] talk about custom assert and factories
 
-Custom asserts in the adapters: Mapping a domain object to an adapter one can be done in several places
-Storing the mapping validation inside a custom assert will ensure no mapping tests will miss a new acceptance criteria.
-Use as well in the domain unit tests, the functional tests, and in the infrastructure.
-TODO: GIVE AN EXAMPLE IN THE CODE
+AssertJ is extendable, you can write [custom assertions](http://joel-costigliola.github.io/assertj/assertj-core-custom-assertions.html) dedicated to your own domain in a fluent way like this:
 
-TODO: WORD ON Test Composition ? here somewhere else ? 
+```kotlin
+assertThat(talks).areRelatedTo(topic)
+``` 
+
+To do such thing you need to create some Assertions class like [TalkAsserts](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/test/kotlin/org/craftsrecords/talkadvisor/recommendation/assertions/TalkAsserts.kt):
+
+```kotlin
+class TalkAssert(actual: Talk) : AbstractAssert<TalkAssert, Talk>(
+        actual,
+        TalkAssert::class.java
+) {
+
+    infix fun `is related to topic`(topicName: String) {
+        matches({ it.title.contains(topicName) }, "is related to topic $topicName")
+    }
+
+    infix fun `is in the format`(talkFormat: TalkFormat) {
+        matches({ it.format == talkFormat }, "correspond explicitly to the format $talkFormat")
+    }
+}
+
+```
+
+If you look also to [RecommendationAssert](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/test/kotlin/org/craftsrecords/talkadvisor/recommendation/assertions/RecommendationAssert.kt)
+
+```kotlin
+class RecommendationAssert(actual: Recommendation) : AbstractAssert<RecommendationAssert, Recommendation>(
+        actual,
+        RecommendationAssert::class.java
+) {
+
+    infix fun `has talks related to`(topicName: String) {
+        matches({
+            it.criteria.topics.any { topic -> topic.name == topicName }
+        }, "recommendations criteria has the topic $topicName")
+
+        actual.talks.those `are related to topic` topicName
+    }
+}
+
+```
+
+You can also see that there is a real encapsulation of the acceptance criteria, because a recommendation related to a specific topic means at least one of its talk is related to that topic and also the stored user criteria are also related to it.
+Otherwise there will be an inconsistency. So next time we have to write a test where we want to check this acceptance criteria, we won't have to recode all of them - we will keep in our tests a **single level of abstraction on the assertions** as well.
+
+And TJWHEN!!! *(Thanks JetBrains We Have Extensions Now)* We can write it in a sexier way than the assertThat. Once your assertions classes are created, you can extend your class in your test to attach the assertions to it.
+
+So you'll be able to write stuffs like:
+
+```kotlin
+ @Then("^the recommended talks correspond to his preferences$")
+    fun `the recommended talks correspond to his preferences`() {
+        val recommendation = testContext.recommendation
+        val profile = testContext.createdProfile
+        val preferences = profile.preferences
+
+        recommendation.that `corresponds to the criteria` preferences
+        recommendation.that `has talks related to` preferences.topics
+        recommendation.that `has only talks in the formats` preferences.talksFormats
+    }
+``` 
+
+To do such things, take a look at [DomainAssertions](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/test/kotlin/org/craftsrecords/talkadvisor/recommendation/assertions/DomainAssertions.kt)
+```kotlin
+val Recommendation.that: RecommendationAssert
+    get() = RecommendationAssert(this)
+
+val Talk.that: TalkAssert
+    get() = TalkAssert(this)
+
+val Iterable<Talk>.those: TalksAssert
+    get() = TalksAssert(this)
+
+val Profile.that: ProfileAssert
+    get() = ProfileAssert(this)
+```
+
+We also have custom assertions inside the infrastructure [ResourcesAssertions](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-application/src/test/kotlin/org/craftsrecords/talkadvisor/infra/resources/assertions/ResourcesAssertions.kt). 
+They are mainly used to make sure the "acceptance criteria" of a mapping of a domain object to an adapter one (and also the opposite) will be shared by all the mappers.
+
+> AssertJ also provide some [assertions generators](http://joel-costigliola.github.io/assertj/assertj-assertions-generator.html), in order to get automatically domain-field based assertions like ``assertThat(talk).hasTitle(title)``.
+> This feature is unfortunately not used on the current project.
+ 
+## Unit Tests
+
+### Domain Object Factories
+
+In Domain-Driven Design, the domain **is not composed of POJOs!** It means the domain objects should not exposes their states but their behaviors through the encapsulation. So mocking a domain object is prohibited.
+Why ? Let's imagine you are mocking a Talk object so it will say that it has a duration of 1 hour and its [format](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/main/kotlin/org/craftsrecords/talkadvisor/recommendation/talk/TalkFormat.kt) is an IGNITE.
+Which doesn't make sense right ? And what's about [the test which is built on top of it](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/39338377d4ac8b76b128e7767d6de9f602e37b7c/talkadvisor-infra/talkadvisor-infra-application/src/test/kotlin/org/craftsrecords/talkadvisor/recommendation/MockCaveatTest.kt)? 
+
+A domain object, thanks to the validation logic of its constructor, will always ensures that it is coherent, no need to check it after the creation. It saves us from a lot of bugs!
+But the counterpart is it makes the tests harder to write. Because each time we want to do a test where a recommendation is needed, it has to be built correctly and you have to think about all the business rules...
+The best way to fix that is the usage of domain object factories. In those factory, we put once for all the creation logic of a domain object which is reused in every tests which needs an instance.
+
+In TalkAdvisor, we have for example [TalkFactory](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/test/kotlin/org/craftsrecords/talkadvisor/recommendation/talk/TalkFactory.kt)
+
+```kotlin
+fun createTalk(criteria: Criteria): Talk {
+    return prepareBuilder()
+            .apply { duration = durationFrom(criteria) }
+            .build()
+}
+
+private fun durationFrom(criteria: Criteria) = criteria.talksFormats.random().randomDuration()
+
+fun createTalk(): Talk {
+    return prepareBuilder().apply { duration = ofMinutes(Random.nextLong(2, 120)) }.build()
+}
+```
+
+As you can see here, we have a factory of Talks which is taking as parameters some criteria. The reason is when you want to create a Recommendation, you have to make sure the stored criteria and the talks are aligned.
+So in the [tests](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-domain/src/test/kotlin/org/craftsrecords/talkadvisor/recommendation/RecommendationTest.kt) we are reusing them to create a valid Recommendation.
+
+```kotlin
+   @Test
+    fun `should create a recommendation`() {
+        val (criteria, talks) = bootstrap()
+
+        val recommendation = Recommendation(criteria = criteria, talks = talks)
+
+        assertThat(recommendation.id).isNotNull()
+        assertThat(recommendation.talks).isEqualTo(talks)
+        assertThat(recommendation.criteria).isEqualTo(criteria)
+    }
+    
+    private fun bootstrap(): Pair<Criteria, Set<Talk>> {
+        val criteria = createCriteria()
+        val talks = createTalks(criteria)
+        return Pair(criteria, talks)
+    }
+
+```
+
+**IMPORTANT NOTICE:** You should never use this kind of factory when you care about the values inside - because if someone is changing the creation logic, your test will fail. It should be used only like black boxes in order to quickly bootstrap data for the tests.
+When you are expecting some specific values for domain objects, **you should create it explicitly in your test**, like done in [RecommendationControllerTest](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-application/src/test/kotlin/org/craftsrecords/talkadvisor/infra/controller/RecommendationControllerTest.kt#L112).
+Since the controller test if actually verifying the values inside the returned JSON are the expected ones - more precisely the preferences of stored the profile, we explicitly create the profile. 
+
+> You can also share pre-initialized builders if needed. 
+
+### Test Composition
+
+Opening the debate...
+
+Let's now take a look at the [Profile](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-application/src/main/kotlin/org/craftsrecords/talkadvisor/infra/resources/Profile.kt) resource inside the REST adapter.
+
+```kotlin 
+data class Profile(private val id: String, val preferences: Preferences) : Identifiable<String> {
+    override fun getId() = id
+}
+
+fun DomainProfile.toResource(): Profile = Profile(this.id, this.preferences.toResource())
+```
+
+Profile is a top-level resource which contains a sub-resource named preferences (same composition than the domain). In order to convert a Profile of the domain to a resource, an extension method ``toResource`` has been defined.
+You can also see the resource transformation is cascaded to the inner preferences. When [testing the Profile resource transformation](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-application/src/test/kotlin/org/craftsrecords/talkadvisor/infra/resources/ProfileTest.kt), we will also test by transitivity the transformation of the preferences into a resource.
+So there is no need to repeat this test at [Preferences level](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-application/src/test/kotlin/org/craftsrecords/talkadvisor/infra/resources/PreferencesTest.kt). 
+
+That's totally fine since the Preferences resource is never used outside of the transformation of a Profile or a Recommendation (the only objects using it). When adopting a black-box test approach, e don't really care about the implementation, but only the exposed behavior.
+Fortunately with the encapsulation principle, we expose the behavior only through a limited number of classes: domain aggregates for entities and value objects and domain services implementing the API.
+It means you only have to write a test where the behavior is exposed. You'll limit this way the number of (useless) tests you'll have to maintain.
+
+On the other hand, edge-cases should be tested directly on the object which has the effective responsibility of dealing with those cases. For example [PreferencesTest](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-application/src/test/kotlin/org/craftsrecords/talkadvisor/infra/resources/PreferencesTest.kt) is testing for the mapping of an unknown TalkFormat (enum):
+
+```kotlin 
+    @Test
+    fun `should throw IllegalArgumentException when trying to map an unknown TalkFormat`() {
+        val topics = listOf(Topic("topic"))
+        val talksFormats = listOf("UNKNOWN")
+        val preferences = Preferences(topics, talksFormats)
+
+        assertThatThrownBy { preferences.toDomainObject() }
+                .isInstanceOf(IllegalArgumentException::class.java)
+                .hasMessage("No enum constant ${TalkFormat::class.java.name}.UNKNOWN")
+    }
+```
+
+You'll not find this test in the upper-levels of the hierarchy of the Preferences resource, like [Profile](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-application/src/test/kotlin/org/craftsrecords/talkadvisor/infra/resources/ProfileTest.kt) and [Recommendation](https://gitlab.com/crafts-records/talkadvisor/talkadvisor-back/blob/master/talkadvisor-infra/talkadvisor-infra-application/src/test/kotlin/org/craftsrecords/talkadvisor/infra/resources/RecommendationTest.kt).
+The following reasons are:
+* If you move all the edge-cases of the children hierarchy at the higher-level (and everywhere in the hierarchy), you'll end-up with a lot of hard-to-maintain tests.
+* In the previous example, you'll have to put the same test inside ProfileTest and RecommendationTest, and it won't change at all the test coverage of your application.
+
+That's basically the concept of test composition.
+ 
+## Integration Tests, Contract Testing & End-To-End Tests
+
+>The documentation is coming soon !
 
 ## Documentation
 
