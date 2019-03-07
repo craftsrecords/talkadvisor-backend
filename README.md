@@ -126,7 +126,9 @@ If you wan to learn more on the testing strategy applied in TalkAdvisor, [here](
 ## Contributors
 
 Julien Topçu - @JulienTopcu
+
 Jordan Nourry - @JkNourry
+
 Juliette de Rancourt - @ju_derancourt 
 
 From craftsrecords.org
