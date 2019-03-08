@@ -73,9 +73,8 @@ internal class RecommendationTest : EntityTest<Recommendation> {
     }
 
     private fun bootstrap(): Pair<Criteria, Set<Talk>> {
-        val criteria = createCriteria()
-        val talks = createTalks(criteria)
-        return Pair(criteria, talks)
+        //factories
+        return null!!
     }
 
 }
