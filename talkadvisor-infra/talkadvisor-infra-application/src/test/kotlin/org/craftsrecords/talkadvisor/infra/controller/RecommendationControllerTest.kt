@@ -5,7 +5,8 @@ import org.craftsrecords.talkadvisor.recommendation.preferences.Preferences
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.profile.Profile
 import org.craftsrecords.talkadvisor.recommendation.spi.Profiles
-import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat.*
+import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat.CONFERENCE
+import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat.QUICKIE
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -16,18 +17,11 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType.APPLICATION_JSON_UTF8
-import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
-import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
-import org.springframework.restdocs.operation.preprocess.Preprocessors.*
-import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
-import org.springframework.restdocs.payload.PayloadDocumentation.responseFields
-import org.springframework.restdocs.snippet.Attributes.key
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.MvcResult
-import org.springframework.test.web.servlet.ResultHandler
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
@@ -79,27 +73,9 @@ internal class RecommendationControllerTest {
                 .andExpect(jsonPath("$.talks[0].title", `is`("QUICKIE DDD")))
                 .andExpect(jsonPath("$.talks[0].duration", `is`("PT10M30S")))
                 .andExpect(jsonPath("$.talks[0].format", `is`("QUICKIE")))
-                .andDo(documentRecommendation())
+        //docrec
     }
-
-    private fun documentRecommendation(): ResultHandler {
-        return document("recommendations",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint()),
-                requestHeaders(headerWithName("User-Id")
-                        .description("The Id of the user who wants some recommendation")),
-                responseFields()
-                        .and(fieldWithPath("id").description("the id of the recommendation"))
-                        .and(fieldWithPath("talks").description("the list of the recommended talks according to the user profile"))
-                        .and(fieldWithPath("talks[].id").description("the id of the talk"))
-                        .and(fieldWithPath("talks[].title").description("the title of the talk"))
-                        .and(fieldWithPath("talks[].duration")
-                                .description("the duration of the talk")
-                                .attributes(key("constraints").value("formatted in the ISO-8601 standard")))
-                        .and(fieldWithPath("talks[].format")
-                                .description("the format of the talk")
-                                .attributes(key("constraints").value("Possible values: ${values().contentToString()}"))))
-    }
+    //fundoc
 
     private fun MvcResult.extractIdFromLocationHeader(): String {
         return this.response.getHeader("Location")!!.substringAfter("$expectedRecommendationLocationUrl/")
