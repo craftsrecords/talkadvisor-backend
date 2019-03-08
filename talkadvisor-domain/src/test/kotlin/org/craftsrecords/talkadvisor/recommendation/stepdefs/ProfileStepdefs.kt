@@ -27,18 +27,9 @@ class ProfileStepdefs(private val testContext: TestContext,
         testContext.userId = "noProfileUser"
     }
 
-    @Given("^he already has a profile$")
-    fun `he already has a profile`() {
-        val profile = Profile(testContext.userId, createPreferences())
-        profiles.save(profile)
-    }
-
     @Given("^he has stored his preferences in his profile$")
     fun `he has stored his preferences in his profile`() {
-        val profile = createProfile(testContext.userId)
-        profiles.save(profile)
-
-        testContext.createdProfile = profile
+        //givenprofile
     }
 
     @When("^he creates his profile$")
@@ -84,6 +75,12 @@ class ProfileStepdefs(private val testContext: TestContext,
                 .isNotNull()
                 .isInstanceOf(ProfileAlreadyExistsException::class.java)
                 .hasMessage(String.format("A profile already exists for the user %s", testContext.userId))
+    }
+
+    @Given("^he already has a profile$")
+    fun `he already has a profile`() {
+        val profile = Profile(testContext.userId, createPreferences())
+        profiles.save(profile)
     }
 
     private fun createProfile(userId: String): Profile {

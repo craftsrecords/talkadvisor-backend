@@ -11,6 +11,16 @@ import java.time.Duration.ofMinutes
 class RecommendationStepdefs(private val testContext: TestContext,
                              private val recommendTalks: RecommendTalks) {
 
+    @When("^he asks for a recommendation$")
+    fun `he asks for a recommendation`() {
+        //whenreco
+    }
+
+    @Then("^the recommended talks correspond to his preferences$")
+    fun `the recommended talks correspond to his preferences`() {
+        //thenreco
+    }
+
     @When("^he asks for a recommendation given his criteria$")
     fun `he asks for a recommendation given his criteria`() {
         val guestCriteria = createGuestCriteriaFromContext()
@@ -20,18 +30,6 @@ class RecommendationStepdefs(private val testContext: TestContext,
         testContext.recommendation = recommendation
     }
 
-    @When("^he asks for a recommendation$")
-    fun `he asks for a recommendation`() {
-        try {
-            val user = testContext.userId
-
-            val recommendation = recommendTalks to user
-
-            testContext.recommendation = recommendation
-        } catch (e: Exception) {
-            testContext.error = e
-        }
-    }
 
     @Then("^talkadvisor recommends some talks$")
     fun `talkadvisor recommends some talks`() {
@@ -57,16 +55,6 @@ class RecommendationStepdefs(private val testContext: TestContext,
         recommendation.that `has only talks having their duration in` range
     }
 
-    @Then("^the recommended talks correspond to his preferences$")
-    fun `the recommended talks correspond to his preferences`() {
-        val recommendation = testContext.recommendation
-        val profile = testContext.createdProfile
-        val preferences = profile.preferences
-
-        recommendation.that `corresponds to the criteria` preferences
-        recommendation.that `has talks related to` preferences.topics
-        recommendation.that `has only talks in the formats` preferences.talksFormats
-    }
 
     private fun createGuestCriteriaFromContext(): GuestCriteria {
         return GuestCriteria(testContext.requestedTopics, testContext.requestedTalksFormats)
