@@ -1,7 +1,7 @@
 package org.craftsrecords.talkadvisor.recommendation.assertions
 
-import org.assertj.core.api.AbstractAssert
 import org.assertj.core.api.AbstractIterableAssert
+import org.craftsrecords.talkadvisor.recommendation.assertions.generated.AbstractTalkAssert
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
@@ -47,7 +47,7 @@ class TalksAssert(actual: Iterable<Talk>) : AbstractIterableAssert<TalksAssert, 
     }
 }
 
-class TalkAssert(actual: Talk) : AbstractAssert<TalkAssert, Talk>(
+class TalkAssert(actual: Talk) : AbstractTalkAssert<TalkAssert, Talk>(
         actual,
         TalkAssert::class.java
 ) {
