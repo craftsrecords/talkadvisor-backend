@@ -1,5 +1,6 @@
 package org.craftsrecords.talkadvisor.recommendation.talk
 
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.craftsrecords.talkadvisor.EntityTest
 import org.craftsrecords.talkadvisor.recommendation.assertions.that
@@ -23,9 +24,10 @@ internal class TalkTest : EntityTest<Talk> {
     fun `should create a conference`() {
         val talk = talk().build()
 
-        talk.that `has id` "id"
-        talk.that `has title` "title"
-        talk.that `has duration` Duration.ofMinutes(45)
+        //talkcustom
+        Assertions.assertThat(talk.id).isEqualTo("id")
+        Assertions.assertThat(talk.title).isEqualTo("title")
+        Assertions.assertThat(talk.duration).isEqualTo(Duration.ofMinutes(45))
         talk.that `is in the format` CONFERENCE
     }
 
