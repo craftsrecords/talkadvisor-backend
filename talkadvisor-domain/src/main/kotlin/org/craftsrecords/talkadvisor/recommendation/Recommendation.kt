@@ -6,7 +6,9 @@ import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 import java.util.*
 
 @Aggregate
-class Recommendation(val id: UUID = UUID.randomUUID(), val criteria: Criteria, talks: Set<Talk>) {
+class Recommendation(val id: UUID = UUID.randomUUID(),
+                     val criteria: Criteria,
+                     talks: Set<Talk>) {
 
     val talks: Set<Talk>
 
