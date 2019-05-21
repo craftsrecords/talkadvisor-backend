@@ -104,7 +104,7 @@ So a profile is bootstrapped for this user directly stored in the "database" usi
 You can also use the same technique when using a side effect feature to perform some assertions in a Then.
 
 Most of the time people are slicing their step definitions the same way their scenarios are sliced. As you can read it from the [cucumber documentation itself](https://docs.cucumber.io/guides/anti-patterns/), it couples everything together and the steps you have made cannot be reused for another scenario.
-The step definitions should be organised the same way than your domain concept and moreover named after it. This way your step definitions code will be factorised, easier to be found and to navigate through, you'll end up with steps which are more maintainable and reusable.
+The step definitions should be organised the same way than your domain concepts and moreover named after it. This way your step definitions code will be factorised, easier to be found and to navigate through, you'll end up with steps which are more maintainable and reusable.
 So in other words, **the step definitions should be designed with the same processes we are using to build our business domain!**
 
 You may wondering how we can share data between several step definitions which is mandatory if we need to reuse them. Cucumber is offering [an integration with the Pico container](https://docs.cucumber.io/cucumber/state/#dependency-injection), a lightweight dependency injection framework.
