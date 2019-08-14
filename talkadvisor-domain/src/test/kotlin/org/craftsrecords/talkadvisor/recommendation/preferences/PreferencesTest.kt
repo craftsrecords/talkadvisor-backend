@@ -6,7 +6,7 @@ import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat.CONFERENCE
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat.QUICKIE
 import org.junit.jupiter.api.Test
 
-internal class PreferencesTest : ValueObjectTest<Preferences> {
+class PreferencesTest : ValueObjectTest<Preferences> {
 
     override fun createValue() = Preferences(setOf(Topic("ddd")), setOf(CONFERENCE))
     override fun createOtherValue() = Preferences(setOf(Topic("ddd")), setOf(QUICKIE))
