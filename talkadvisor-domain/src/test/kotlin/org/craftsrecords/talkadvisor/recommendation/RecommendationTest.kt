@@ -9,34 +9,17 @@ import org.craftsrecords.talkadvisor.recommendation.criteria.createCriteria
 import org.craftsrecords.talkadvisor.recommendation.preferences.Topic
 import org.craftsrecords.talkadvisor.recommendation.talk.Talk
 import org.craftsrecords.talkadvisor.recommendation.talk.TalkFormat
-import org.craftsrecords.talkadvisor.recommendation.talk.createTalk
 import org.craftsrecords.talkadvisor.recommendation.talk.createTalks
 import org.junit.jupiter.api.Test
 import java.time.Duration
 import java.util.*
 
-internal class RecommendationTest : EntityTest<Recommendation> {
-
-    override fun createEqualEntities(): Pair<Recommendation, Recommendation> {
-        val id = UUID.randomUUID()
-        val criteria = createCriteria()
-        return Pair(
-                Recommendation(id, criteria = criteria, talks = createTalks(criteria)),
-                Recommendation(id, criteria = criteria, talks = createTalks(criteria))
-        )
-    }
-
-    override fun createNonEqualEntities(): Pair<Recommendation, Recommendation> {
-        val (criteria, talks) = bootstrap()
-        return Pair(
-                Recommendation(criteria = criteria, talks = talks),
-                Recommendation(criteria = criteria, talks = talks)
-        )
-    }
+@InjectDomainObjects
+class RecommendationTest : EntityTest<Recommendation> {
 
     @Test
-    fun `should create a recommendation`() {
-        val (criteria, talks) = bootstrap()
+    fun `should create a recommendation`(@Linked criteriaAndTalks: Pair<Criteria, Set<Talk>>) {
+        val (criteria, talks) = criteriaAndTalks
 
         val recommendation = Recommendation(criteria = criteria, talks = talks)
 
@@ -60,22 +43,35 @@ internal class RecommendationTest : EntityTest<Recommendation> {
     }
 
     @Test
-    fun `should store a copy of the talks`() {
+    fun `should store a copy of the talks`(@Linked criteriaAndTalks: Pair<Criteria, Set<Talk>>,
+                                           newTalk: Talk) {
 
-        var (criteria, talks) = bootstrap()
+        var (criteria, talks) = criteriaAndTalks
         talks = talks.toMutableSet()
+
         val recommendation = Recommendation(criteria = criteria, talks = talks)
-        val newTalk = createTalk()
 
         talks.add(newTalk)
 
         assertThat(recommendation.talks).doesNotContain(newTalk)
     }
 
-    private fun bootstrap(): Pair<Criteria, Set<Talk>> {
+
+    override fun createEqualEntities(): Pair<Recommendation, Recommendation> {
+        val id = UUID.randomUUID()
         val criteria = createCriteria()
-        val talks = createTalks(criteria)
-        return Pair(criteria, talks)
+        return Pair(
+                Recommendation(id, criteria = criteria, talks = createTalks(criteria)),
+                Recommendation(id, criteria = criteria, talks = createTalks(criteria))
+        )
     }
 
+    override fun createNonEqualEntities(): Pair<Recommendation, Recommendation> {
+        val criteria = createCriteria()
+        val talks = createTalks(criteria)
+        return Pair(
+                Recommendation(criteria = criteria, talks = talks),
+                Recommendation(criteria = criteria, talks = talks)
+        )
+    }
 }

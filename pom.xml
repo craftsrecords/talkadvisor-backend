@@ -24,6 +24,7 @@
         <junit.version>4.12</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit-platform.version>1.4.0</junit-platform.version>
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
     <build>
         <plugins>

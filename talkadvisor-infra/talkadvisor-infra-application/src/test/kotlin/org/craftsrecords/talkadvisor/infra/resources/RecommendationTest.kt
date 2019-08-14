@@ -1,14 +1,15 @@
 package org.craftsrecords.talkadvisor.infra.resources
 
 import org.craftsrecords.talkadvisor.infra.resources.assertions.that
-import org.craftsrecords.talkadvisor.recommendation.createRecommendation
+import org.craftsrecords.talkadvisor.recommendation.InjectDomainObjects
 import org.junit.jupiter.api.Test
+import org.craftsrecords.talkadvisor.recommendation.Recommendation as DomainRecommendation
 
-internal class RecommendationTest {
+@InjectDomainObjects
+class RecommendationTest {
 
     @Test
-    fun `should convert domain recommendation to resource`() {
-        val domainRecommendation = createRecommendation()
+    fun `should convert domain recommendation to resource`(domainRecommendation: DomainRecommendation) {
 
         val recommendation = domainRecommendation.toResource()
 
